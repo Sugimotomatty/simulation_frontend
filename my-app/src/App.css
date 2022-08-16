@@ -1,0 +1,17 @@
+/* Brand */
+main table {
+  border-collapse: collapse;
+}
+
+main table tr th{
+  border: solid 1px #333;
+  color: white;
+  background-color:#1E3A8A;
+  padding: 0 20px;
+  text-align: center;
+}
+
+main table tr td {
+  border: solid 1px #333;
+  text-align: center;
+}
