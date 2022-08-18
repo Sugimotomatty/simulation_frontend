@@ -1,12 +1,15 @@
 import React from "react";
 import Card from "./Card";
 import data from "./Data";
+import Modal from "./Modal";
 
 export default function Brand() {
-  const cards = data.map((item) => {
+  const [isShow, setIsShow] = React.useState(false);
+
+  const cards = data.map((item, index) => {
     return (
       <Card
-        id={item.id}
+        key={index}
         issuer={item.issuer}
         currency={item.currency}
         type={item.type}
@@ -22,14 +25,17 @@ export default function Brand() {
   return (
     <main>
       <div className="flex justify-between">
-        <button className="bg-orange-400 text-white px-6 py-1 rounded">
+        <button className="bg-orange-400 text-white px-6 py-1 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition">
           条件入力画面へ
         </button>
         <div className="flex gap-5">
-          <button className="bg-gray-400 text-white px-6 py-1 rounded">
+          <button
+            onClick={() => setIsShow(true)}
+            className="bg-gray-400 text-white px-6 py-1 rounded hover:bg-deepBlue"
+          >
             銘柄追加
           </button>
-          <button className="bg-gray-400 text-white px-6 py-1 rounded">
+          <button className="bg-gray-400 text-white px-6 py-1 rounded hover:bg-deepBlue">
             銘柄削除
           </button>
         </div>
@@ -48,6 +54,10 @@ export default function Brand() {
         </tr>
         {cards}
       </table>
+      <Modal 
+        isShow = {isShow}
+        setIsShow = {setIsShow}
+      />
     </main>
   );
 }
