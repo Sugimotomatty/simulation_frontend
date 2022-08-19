@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SelectedBrand() {
+  const navigate = useNavigate();
   return (
     <>
       <main>
@@ -21,6 +23,12 @@ export default function SelectedBrand() {
               className="border border-black rounded  mt-2 px-5 py-2"
             ></input>
           </div>
+          <button
+            onClick={() => navigate("/Brand")}
+            className="h-10 bg-gray-400 text-white mx-8 px-8 rounded hover:bg-deepBlue"
+          >
+            戻る
+          </button>
           <button className="h-10 bg-gray-400 text-white px-8 rounded hover:bg-deepBlue">
             シュミレーション
           </button>
@@ -28,7 +36,12 @@ export default function SelectedBrand() {
         <table className="my-8 w-full">
           <tr>
             <th>参考利回り</th>
-            <th rowspan="2" className="text-red-500 bg-white border border-black">計算結果表示</th>
+            <th
+              rowspan="2"
+              className="text-red-500 bg-white border border-black"
+            >
+              計算結果表示
+            </th>
           </tr>
           <tr>
             <th>(加重平均)</th>

@@ -2,9 +2,12 @@ import React from "react";
 import Card from "./Card";
 import data from "./Data";
 import Modal from "./Modal";
+import { useNavigate } from "react-router-dom";
 
 export default function Brand() {
   const [isShow, setIsShow] = React.useState(false);
+
+  const navigate = useNavigate();
 
   const cards = data.map((item, index) => {
     return (
@@ -25,7 +28,10 @@ export default function Brand() {
   return (
     <main>
       <div className="flex justify-between">
-        <button className="bg-orange-400 text-white px-6 py-1 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition">
+        <button
+          onClick={() => navigate("/SelectedBrand")}
+          className="bg-orange-400 text-white px-6 py-1 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition"
+        >
           条件入力画面へ
         </button>
         <div className="flex gap-5">
@@ -54,10 +60,7 @@ export default function Brand() {
         </tr>
         {cards}
       </table>
-      <Modal 
-        isShow = {isShow}
-        setIsShow = {setIsShow}
-      />
+      <Modal isShow={isShow} setIsShow={setIsShow} />
     </main>
   );
 }
