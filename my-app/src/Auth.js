@@ -39,7 +39,7 @@ export default function Auth() {
               placeholder="user@example.com"
               name="email"
               label="E-mail"
-              value={email}
+              // value={email}
               // onChange={(event) => {
               //   handleChangeEmail(event);
               // }}
@@ -49,7 +49,7 @@ export default function Auth() {
             <input
               type="password"
               label="Password"
-              value={password}
+              // value={password}
               // onChange={(event) => {
               //   handleChangePassword(event);
               // }}

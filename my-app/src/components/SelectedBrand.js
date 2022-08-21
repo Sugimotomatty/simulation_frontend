@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import CheckedData from "./CheckedData.js"
 
 export default function SelectedBrand() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ export default function SelectedBrand() {
           <tr>
             <th>参考利回り</th>
             <th
-              rowspan="2"
+              rowSpan="2"
               className="text-red-500 bg-white border border-black"
             >
               計算結果表示
@@ -47,17 +48,17 @@ export default function SelectedBrand() {
             <th>(加重平均)</th>
           </tr>
           <tr>
-            <th rowspan="2">番号</th>
-            <th rowspan="2">発行体</th>
-            <th rowspan="2">通貨</th>
-            <th rowspan="2">商品種類</th>
-            <th rowspan="2">債券格付け</th>
-            <th rowspan="2">ファーストコール</th>
-            <th rowspan="2">償還日</th>
-            <th rowspan="2">クーポン利回り</th>
-            <th rowspan="2">単価</th>
-            <th rowspan="2">参考利回り</th>
-            <th rowspan="2">利払い日</th>
+            <th rowSpan="2">番号</th>
+            <th rowSpan="2">発行体</th>
+            <th rowSpan="2">通貨</th>
+            <th rowSpan="2">商品種類</th>
+            <th rowSpan="2">債券格付け</th>
+            <th rowSpan="2">ファーストコール</th>
+            <th rowSpan="2">償還日</th>
+            <th rowSpan="2">クーポン利回り</th>
+            <th rowSpan="2">単価</th>
+            <th rowSpan="2">参考利回り</th>
+            <th rowSpan="2">利払い日</th>
             <th>購入数量</th>
           </tr>
           <tr>

@@ -1,18 +1,21 @@
 import React from "react";
-import Card from "./Card";
 import data from "./Data";
 import Modal from "./Modal";
+import Alert from "./Alert";
+import Card from "./Card";
+import CheckedData from "./CheckedData";
 import { useNavigate } from "react-router-dom";
 
 export default function Brand() {
   const [isShow, setIsShow] = React.useState(false);
-
+  const [isAlert, setIsAlert] = React.useState(false);
   const navigate = useNavigate();
 
   const cards = data.map((item, index) => {
     return (
       <Card
         key={index}
+        id={item.id}
         issuer={item.issuer}
         currency={item.currency}
         type={item.type}
@@ -29,7 +32,9 @@ export default function Brand() {
     <main>
       <div className="flex justify-between">
         <button
-          onClick={() => navigate("/SelectedBrand")}
+          onClick={() => {
+            navigate("/SelectedBrand");
+          }}
           className="bg-orange-400 text-white px-6 py-1 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition"
         >
           条件入力画面へ
@@ -41,7 +46,9 @@ export default function Brand() {
           >
             銘柄追加
           </button>
-          <button className="bg-gray-400 text-white px-6 py-1 rounded hover:bg-deepBlue">
+          <button 
+          onClick={() => setIsAlert(true)}
+          className="bg-gray-400 text-white px-6 py-1 rounded hover:bg-deepBlue">
             銘柄削除
           </button>
         </div>
@@ -49,6 +56,7 @@ export default function Brand() {
       <table className="my-8 w-full">
         <tr>
           <th>選択</th>
+          <th>番号</th>
           <th>発行体</th>
           <th>通貨</th>
           <th>商品種類</th>
@@ -61,6 +69,7 @@ export default function Brand() {
         {cards}
       </table>
       <Modal isShow={isShow} setIsShow={setIsShow} />
+      <Alert isAlert={isAlert} setIsAlert={setIsAlert} />
     </main>
   );
 }
