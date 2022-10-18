@@ -3,15 +3,25 @@ import data from "./Data";
 import Modal from "./Modal";
 import Alert from "./Alert";
 import Card from "./Card";
-import CheckedData from "./CheckedData";
+// import CheckedData from "./CheckedData";
 import { useNavigate } from "react-router-dom";
+import {useState,useEffect} from "react";
+import { read, utils } from 'xlsx';
+
+import * as XLSX from "xlsx";
+
 
 export default function Brand() {
   const [isShow, setIsShow] = React.useState(false);
   const [isAlert, setIsAlert] = React.useState(false);
   const navigate = useNavigate();
 
+ 
+  
+
   const cards = data.map((item, index) => {
+    
+
     return (
       <Card
         key={index}
@@ -26,9 +36,11 @@ export default function Brand() {
         interestDay={item.interestDay}
       />
     );
+    
   });
 
   return (
+    
     <main>
       <div className="flex justify-between">
         <button
@@ -39,6 +51,7 @@ export default function Brand() {
         >
           条件入力画面へ
         </button>
+        
         <div className="flex gap-5">
           <button
             onClick={() => setIsShow(true)}
@@ -51,6 +64,10 @@ export default function Brand() {
           className="bg-gray-400 text-white px-6 py-1 rounded hover:bg-deepBlue">
             銘柄削除
           </button>
+
+  
+
+          
         </div>
       </div>
       <table className="my-8 w-full">
@@ -71,5 +88,6 @@ export default function Brand() {
       <Modal isShow={isShow} setIsShow={setIsShow} />
       <Alert isAlert={isAlert} setIsAlert={setIsAlert} />
     </main>
+    
   );
 }

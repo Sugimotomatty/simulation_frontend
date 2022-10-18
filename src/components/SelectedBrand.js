@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import CheckedData from "./CheckedData.js"
 
+
 export default function SelectedBrand() {
   const navigate = useNavigate();
   return (
