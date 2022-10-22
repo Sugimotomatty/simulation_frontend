@@ -3,9 +3,7 @@ import data from "./Data";
 import Modal from "./Modal";
 import Alert from "./Alert";
 import Card from "./Card";
-// import CheckedData from "./CheckedData";
 import { useNavigate } from "react-router-dom";
-import {useState,useEffect} from "react";
 import { read, utils } from 'xlsx';
 
 import * as XLSX from "xlsx";
@@ -15,10 +13,7 @@ export default function Brand() {
   const [isShow, setIsShow] = React.useState(false);
   const [isAlert, setIsAlert] = React.useState(false);
   const navigate = useNavigate();
-
- 
   
-
   const cards = data.map((item, index) => {
     
 
@@ -64,9 +59,6 @@ export default function Brand() {
           className="bg-gray-400 text-white px-6 py-1 rounded hover:bg-deepBlue">
             銘柄削除
           </button>
-
-  
-
           
         </div>
       </div>
@@ -86,7 +78,7 @@ export default function Brand() {
         {cards}
       </table>
       <Modal isShow={isShow} setIsShow={setIsShow} />
-      <Alert isAlert={isAlert} setIsAlert={setIsAlert} />
+      <Alert isAlert={isAlert} setIsAlert={setIsAlert} message="＊本当に削除しますか？＊"/>
     </main>
     
   );

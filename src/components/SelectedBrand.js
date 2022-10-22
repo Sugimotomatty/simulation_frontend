@@ -1,10 +1,29 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import CheckedData from "./CheckedData.js"
-
+import CheckedData from "./SelectedData.js";
+import SelectedCard from "./SelectedCard.js";
+import Alert from "./Alert";
 
 export default function SelectedBrand() {
+  const [isAlert, setIsAlert] = React.useState(false);
   const navigate = useNavigate();
+
+  const selectedCards = CheckedData.map((item, index) => {
+    return (
+      <SelectedCard
+        key={index}
+        id={item.id}
+        issuer={item.issuer}
+        currency={item.currency}
+        type={item.type}
+        rank={item.rank}
+        call={item.call}
+        returnDay={item.returnDay}
+        cp={item.cp}
+        interestDay={item.interestDay}
+      />
+    );
+  });
   return (
     <>
       <main>
@@ -12,7 +31,7 @@ export default function SelectedBrand() {
           <div className="">
             <div>受渡日</div>
             <input
-              type="text"
+              type="date"
               placeholder="YYYY/MM/DD"
               className="border border-black rounded mr-8 mt-2 px-5 py-2"
             ></input>
@@ -20,7 +39,7 @@ export default function SelectedBrand() {
           <div className="mr-auto">
             <div>為替レート</div>
             <input
-              type="text"
+              type="number"
               placeholder="円/ドル"
               className="border border-black rounded  mt-2 px-5 py-2"
             ></input>
@@ -31,7 +50,10 @@ export default function SelectedBrand() {
           >
             戻る
           </button>
-          <button className="h-10 bg-gray-400 text-white px-8 rounded hover:bg-deepBlue">
+          <button
+            onClick={() => setIsAlert(true)}
+            className="h-10 bg-gray-400 text-white px-8 rounded hover:bg-deepBlue"
+          >
             シュミレーション
           </button>
         </div>
@@ -58,14 +80,16 @@ export default function SelectedBrand() {
             <th rowSpan="2">償還日</th>
             <th rowSpan="2">クーポン利回り</th>
             <th rowSpan="2">単価</th>
-            <th rowSpan="2">参考利回り</th>
             <th rowSpan="2">利払い日</th>
-            <th>購入数量</th>
+            <th rowSpan="1">購入数量</th>
+            <th rowSpan="2">参考利回り</th>
           </tr>
           <tr>
             <th>(円相当額)</th>
           </tr>
+          {selectedCards}
         </table>
+        <Alert isAlert={isAlert} setIsAlert={setIsAlert} message="シュミレーションを行いますか？" alert="*結果の出力には10秒ほどかかります*"/>
       </main>
     </>
   );
