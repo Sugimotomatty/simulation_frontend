@@ -4,19 +4,16 @@ import Modal from "./Modal";
 import Alert from "./Alert";
 import Card from "./Card";
 import { useNavigate } from "react-router-dom";
-import { read, utils } from 'xlsx';
-
-import * as XLSX from "xlsx";
-
 
 export default function Brand() {
   const [isShow, setIsShow] = React.useState(false);
   const [isAlert, setIsAlert] = React.useState(false);
-  const navigate = useNavigate();
-  
-  const cards = data.map((item, index) => {
-    
 
+  const navigate = useNavigate();
+
+  // let table = document.getElementById("targetTable");
+
+  const cards = data.map((item, index) => {
     return (
       <Card
         key={index}
@@ -31,22 +28,40 @@ export default function Brand() {
         interestDay={item.interestDay}
       />
     );
-    
   });
 
+  // for (let row of table.rows) {
+  //   for (let cell of row.cells) {
+  //     console.log(cell.innerText);
+  //   }
+  // }
+
+  function getValues() {
+    const checks = document.getElementsByClassName("checks");
+    let checkedNum = [];
+
+    for (let i = 0; i < checks.length; i++) {
+      if(checks[i].checked === true){
+        checkedNum.push(parseInt([i]) + 1);
+      }
+    }
+
+    console.log(checkedNum);
+  }
+
   return (
-    
     <main>
       <div className="flex justify-between">
         <button
           onClick={() => {
             navigate("/SelectedBrand");
+            getValues();
           }}
           className="bg-orange-400 text-white px-6 py-1 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition"
         >
           条件入力画面へ
         </button>
-        
+
         <div className="flex gap-5">
           <button
             onClick={() => setIsShow(true)}
@@ -54,32 +69,37 @@ export default function Brand() {
           >
             銘柄追加
           </button>
-          <button 
-          onClick={() => setIsAlert(true)}
-          className="bg-gray-400 text-white px-6 py-1 rounded hover:bg-deepBlue">
+          <button
+            onClick={() => setIsAlert(true)}
+            className="bg-gray-400 text-white px-6 py-1 rounded hover:bg-deepBlue"
+          >
             銘柄削除
           </button>
-          
         </div>
       </div>
-      <table className="my-8 w-full">
-        <tr>
-          <th>選択</th>
-          <th>番号</th>
-          <th>発行体</th>
-          <th>通貨</th>
-          <th>商品種類</th>
-          <th>債券格付け</th>
-          <th>ファーストコール</th>
-          <th>償還日</th>
-          <th>CP</th>
-          <th>利払い日</th>
-        </tr>
-        {cards}
+      <table className="my-8 w-full" id="targetTable">
+        <thead>
+          <tr>
+            <th>選択</th>
+            <th>番号</th>
+            <th>発行体</th>
+            <th>通貨</th>
+            <th>商品種類</th>
+            <th>債券格付け</th>
+            <th>ファーストコール</th>
+            <th>償還日</th>
+            <th>CP</th>
+            <th>利払い日</th>
+          </tr>
+        </thead>
+        <tbody>{cards}</tbody>
       </table>
       <Modal isShow={isShow} setIsShow={setIsShow} />
-      <Alert isAlert={isAlert} setIsAlert={setIsAlert} message="＊本当に削除しますか？＊"/>
+      <Alert
+        isAlert={isAlert}
+        setIsAlert={setIsAlert}
+        message="＊本当に削除しますか？＊"
+      />
     </main>
-    
   );
 }

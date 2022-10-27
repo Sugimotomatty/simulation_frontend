@@ -1,21 +1,23 @@
 import React from "react";
 
 export default function Card(props) {
-  const [isChecked, setIsChecked] = React.useState(false);
-  function handleClick() {
-    setIsChecked((prevIsChecked) => {
-      return prevIsChecked ? false : true;
-    });
-    console.log(isChecked);
-  }
+  // const [isChecked, setIsChecked] = React.useState(false);
+  // function handleClick() {
+  //   setIsChecked((prevIsChecked) => {
+  //     return prevIsChecked ? false : true;
+  //   });
+  //   console.log(isChecked);
+  // }
   return (
     <>
       <tr>
         <td className="bg-gray-400">
           <input
             type="checkbox"
-            checked={isChecked}
-            onChange={handleClick}
+            className="checks"
+            value="aaaa"
+            // checked={isChecked}
+            // onChange={handleClick}
           ></input>
         </td>
         <td>{props.id}</td>

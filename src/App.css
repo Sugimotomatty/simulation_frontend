@@ -3,7 +3,7 @@ main table {
   border-collapse: collapse;
 }
 
-main table tr th {
+main table thead tr th {
   border: solid 1px #333;
   color: white;
   background-color: #1e3a8a;

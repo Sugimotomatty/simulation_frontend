@@ -58,38 +58,45 @@ export default function SelectedBrand() {
           </button>
         </div>
         <table className="my-8 w-full">
-          <tr>
-            <th>参考利回り</th>
-            <th
-              rowSpan="2"
-              className="text-red-500 bg-white border border-black"
-            >
-              計算結果表示
-            </th>
-          </tr>
-          <tr>
-            <th>(加重平均)</th>
-          </tr>
-          <tr>
-            <th rowSpan="2">番号</th>
-            <th rowSpan="2">発行体</th>
-            <th rowSpan="2">通貨</th>
-            <th rowSpan="2">商品種類</th>
-            <th rowSpan="2">債券格付け</th>
-            <th rowSpan="2">ファーストコール</th>
-            <th rowSpan="2">償還日</th>
-            <th rowSpan="2">クーポン利回り</th>
-            <th rowSpan="2">単価</th>
-            <th rowSpan="2">利払い日</th>
-            <th rowSpan="1">購入数量</th>
-            <th rowSpan="2">参考利回り</th>
-          </tr>
-          <tr>
-            <th>(円相当額)</th>
-          </tr>
-          {selectedCards}
+          <thead>
+            <tr>
+              <th>参考利回り</th>
+              <th
+                rowSpan="2"
+                className="text-red-500 bg-white border border-black"
+              >
+                計算結果表示
+              </th>
+            </tr>
+            <tr>
+              <th>(加重平均)</th>
+            </tr>
+            <tr>
+              <th rowSpan="2">番号</th>
+              <th rowSpan="2">発行体</th>
+              <th rowSpan="2">通貨</th>
+              <th rowSpan="2">商品種類</th>
+              <th rowSpan="2">債券格付け</th>
+              <th rowSpan="2">ファーストコール</th>
+              <th rowSpan="2">償還日</th>
+              <th rowSpan="2">クーポン利回り</th>
+              <th rowSpan="2">単価</th>
+              <th rowSpan="2">利払い日</th>
+              <th rowSpan="1">購入数量</th>
+              <th rowSpan="2">参考利回り</th>
+            </tr>
+            <tr>
+              <th>(円相当額)</th>
+            </tr>
+          </thead>
+          <tbody>{selectedCards}</tbody>
         </table>
-        <Alert isAlert={isAlert} setIsAlert={setIsAlert} message="シュミレーションを行いますか？" alert="*結果の出力には10秒ほどかかります*"/>
+        <Alert
+          isAlert={isAlert}
+          setIsAlert={setIsAlert}
+          message="シュミレーションを行いますか？"
+          alert="*結果の出力には10秒ほどかかります*"
+        />
       </main>
     </>
   );
