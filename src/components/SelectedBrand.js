@@ -137,7 +137,7 @@ export default function SelectedBrand() {
           </thead>
           <tbody>{selectedCards}</tbody>
         </table>
-        <SingleBrandModal isShow={isShow} setIsShow={setIsShow} />
+        <SingleBrandModal isShow={isShow} setIsShow={setIsShow}/>
         <Alert
           isAlert={isAlert}
           setIsAlert={setIsAlert}
