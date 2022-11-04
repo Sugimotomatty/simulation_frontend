@@ -2,13 +2,12 @@ import Auth from "./Auth";
 import Brand from "./components/Brand";
 import SelectedBrand from "./components/SelectedBrand";
 import "./App.css";
-import axios from 'axios';
+// import axios from 'axios';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
 export default function App() {
 
- 
 
   return (
     <>

@@ -1,6 +1,6 @@
 import React from "react";
 import data from "./Data";
-import Modal from "./Modal";
+import Modal from "./AddModal";
 import Alert from "./Alert";
 import Card from "./Card";
 import { useNavigate } from "react-router-dom";
@@ -8,10 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function Brand() {
   const [isShow, setIsShow] = React.useState(false);
   const [isAlert, setIsAlert] = React.useState(false);
-
   const navigate = useNavigate();
-
-  // let table = document.getElementById("targetTable");
 
   const cards = data.map((item, index) => {
     return (
@@ -30,23 +27,27 @@ export default function Brand() {
     );
   });
 
-  // for (let row of table.rows) {
-  //   for (let cell of row.cells) {
-  //     console.log(cell.innerText);
-  //   }
-  // }
-
   function getValues() {
+    // const tableElement = document.getElementById("targetTable");
+    // const rowElements = tableElement.rows;
     const checks = document.getElementsByClassName("checks");
-    let checkedNum = [];
+    let selectedNum = [];
 
     for (let i = 0; i < checks.length; i++) {
-      if(checks[i].checked === true){
-        checkedNum.push(parseInt([i]) + 1);
+      if (checks[i].checked === true) {
+        selectedNum.push(parseInt(i) + 1);
+        // newData["issuer"] = rowElements[i].cells[2]
+        // newData["currency"] = rowElements[i].cells[3]
+        // newData["type"] = rowElements[i].cells[4]
+        // newData["rank"] = rowElements[i].cells[5]
+        // newData["call"] = rowElements[i].cells[6]
+        // newData["returnDay"] = rowElements[i].cells[7]
+        // newData["cp"] = rowElements[i].cells[8]
+        // newData["interestDay"] = rowElements[i].cells[9]
+        // selectedData.push(newData);
       }
     }
-
-    console.log(checkedNum);
+    console.log(selectedNum);
   }
 
   return (
@@ -77,7 +78,7 @@ export default function Brand() {
           </button>
         </div>
       </div>
-      <table className="my-8 w-full" id="targetTable">
+      <table className="my-8 w-full">
         <thead>
           <tr>
             <th>選択</th>
@@ -92,7 +93,7 @@ export default function Brand() {
             <th>利払い日</th>
           </tr>
         </thead>
-        <tbody>{cards}</tbody>
+        <tbody id="targetTable">{cards}</tbody>
       </table>
       <Modal isShow={isShow} setIsShow={setIsShow} />
       <Alert
