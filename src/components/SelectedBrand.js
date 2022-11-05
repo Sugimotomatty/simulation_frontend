@@ -97,6 +97,7 @@ export default function SelectedBrand() {
             onClick={() => {
               setIsAlert(true);
               showFunc();
+              navigate("/Simulation");
             }}
             className="h-10 bg-gray-400 text-white px-8 rounded hover:bg-deepBlue"
           >
