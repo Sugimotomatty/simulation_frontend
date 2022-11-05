@@ -43,6 +43,10 @@ main table tr td {
 }
 
 /* simulation */
+ul{
+  border-color: #1e3a8a;
+}
+
 li{
   background-color: #1e3a8a;
   color: white;

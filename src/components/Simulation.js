@@ -4,12 +4,15 @@ import "react-tabs/style/react-tabs.css";
 import StockImg_1 from "../images/stock_img_1.jpg";
 import StockImg_2 from "../images/stock_img_2.jpg";
 import StockImg_3 from "../images/stock_img_3.jpg";
+import { useNavigate } from "react-router-dom";
 
 export default function Simulation() {
+  const navigate = useNavigate();
   return (
     <>
-      <div className="flex justify-end">
-        <button className="bg-orange-400 text-lg text-white px-8 py-1 mx-2 my-2 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition">
+      <div className="flex justify-between items-center my-4">
+        <button onClick={() => navigate("/SelectedBrand")} className="border rounded bg-gray-400 text-white px-6 py-2 mx-4 hover:bg-deepBlue">戻る</button>
+        <button className="bg-orange-400 text-lg text-white px-8 py-1 mx-4 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition">
           PDF出力
         </button>
       </div>
