@@ -1,6 +1,6 @@
 import React from "react";
 import data from "./Data";
-import Modal from "./AddModal";
+import AddModal from "./AddModal";
 import Alert from "./Alert";
 import Card from "./Card";
 import { useNavigate } from "react-router-dom";
@@ -95,7 +95,7 @@ export default function Brand() {
         </thead>
         <tbody id="targetTable">{cards}</tbody>
       </table>
-      <Modal isShow={isShow} setIsShow={setIsShow} />
+      <AddModal isShow={isShow} setIsShow={setIsShow} />
       <Alert
         isAlert={isAlert}
         setIsAlert={setIsAlert}
