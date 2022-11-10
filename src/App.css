@@ -41,3 +41,19 @@ main table tr td {
   width: 80%;
   background: #fff;
 }
+
+/* simulation */
+ul{
+  border-color: #1e3a8a;
+}
+
+li{
+  background-color: #1e3a8a;
+  color: white;
+  margin-right: 8px;
+  border-radius: 6px 6px 0px 0px;
+}
+
+li:focus{
+  color: #1e3a8a;
+}

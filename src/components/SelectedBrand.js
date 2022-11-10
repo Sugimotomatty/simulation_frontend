@@ -1,15 +1,31 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import CheckedData from "./SelectedData.js";
+import Data from "./Data.js";
 import SelectedCard from "./SelectedCard.js";
 import Alert from "./Alert";
 import SingleBrandModal from "./SingleBrandModal";
+import axios from 'axios'
+
 
 export default function SelectedBrand() {
   const navigate = useNavigate();
   const [isShow, setIsShow] = React.useState(false);
   const [isAlert, setIsAlert] = React.useState(false);
   const [isHandleDrop, setIsHandleDrop] = React.useState("");
+  // ここから下スギモト
+  // const [data, setData] = React.useState("");
+  
+	// const url = "http://127.0.0.1:8000/api";
+
+	// const GetData = () => {
+	// 	axios.get(url).then((res) => {
+	// 		setData(res.data);
+	// 	});
+	// };
+ 
+
+// ここまで
+
   // const [isActive, setIsActive] = React.useState(true);
 
   // function showSingleBrandButton() {
@@ -19,33 +35,85 @@ export default function SelectedBrand() {
   //     setIsActive((prevActive) => prevActive = false);
   //   }
   // }
+ 
 
   function showFunc() {
     console.log(isHandleDrop);
+    
   }
 
-  const selectedCards = CheckedData.map((item, index) => {
-    return (
-      <SelectedCard
-        key={index}
-        id={item.id}
-        issuer={item.issuer}
-        currency={item.currency}
-        type={item.type}
-        rank={item.rank}
-        call={item.call}
-        returnDay={item.returnDay}
-        cp={item.cp}
-        interestDay={item.interestDay}
-      />
-    );
-  });
+
+
+  const selectedCards = Data.map((item, index) => {
+    // ここから下スギモト
+    // if (typeof data.message ==="object"){
+      
+    //   for (let i=0;i<data.message.length;i++){
+    //     if (index+1=== data.message[i]) {
+         
+          //ここまで
+         
+ 
+         return ( 
+         
+
+          
+           
+           
+          <SelectedCard
+            
+             key={index}
+             id={item.id}
+             issuer={item.issuer}
+             currency={item.currency}
+             type={item.type}
+             rank={item.rank}
+             call={item.call}
+             returnDay={item.returnDay}
+             cp={item.cp}
+             interestDay={item.interestDay}
+           />
+          
+         );
+
+         //ここから下スギモト
+ 
+
+      // }
+     
+      // }
+
+       
+      // }
+     //ここまでスギモト
+    }
+    
+
+    
+       );
+  
+      
+    
+       
+
+  
+
+
   return (
     <>
-      <main>
-        <div className="flex gap-4">
+      <main >
+        
+        <div className="flex gap-4" >
+          {/* ここから下スギモト */}
+        {/* <div> 
+			 <div>ここに処理を書いていきます</div>
+			{data ? <div>{data.message}</div> : <button onClick={GetData}>データを取得</button>}
+		</div> */}
+    {/* ここまで */}
           <div className="flex flex-col mb-6">
             <label className="mb-2">積み立て投資先</label>
+            
+           
             <select
               id="pet-select"
               onChange={(e) => {
@@ -97,6 +165,7 @@ export default function SelectedBrand() {
             onClick={() => {
               setIsAlert(true);
               showFunc();
+              
             }}
             className="h-10 bg-gray-400 text-white px-8 rounded hover:bg-deepBlue"
           >
@@ -144,6 +213,7 @@ export default function SelectedBrand() {
           message="シュミレーションを行いますか？"
           alert="*結果の出力には15秒ほどかかります*"
         />
+
       </main>
     </>
   );

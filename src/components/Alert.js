@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Alert(props) {
+  const navigate = useNavigate();
   if (props.isAlert) {
     return (
       <>
@@ -12,7 +14,10 @@ export default function Alert(props) {
               <button onClick={() => props.setIsAlert(false)}
               className="bg-gray-400 text-white px-16 py-1 rounded-3xl hover:bg-deepBlue"
               >戻る</button>
-              <button className="bg-gray-400 text-white px-16 py-1 rounded-3xl hover:bg-deepBlue">実行</button>
+              <button 
+              onClick={()=>
+              {navigate("/Simulation");
+              }} className="bg-gray-400 text-white px-16 py-1 rounded-3xl hover:bg-deepBlue">実行</button>
             </div>
           </div>
         </div>
