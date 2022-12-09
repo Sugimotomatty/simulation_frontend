@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios'
 
 export default function Modal(props) {
   const [formData, setFormData] = React.useState({
@@ -9,24 +10,49 @@ export default function Modal(props) {
     risk: "",
   });
 
-  const handleChange = (e) => {
+
+
+const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
   };
+
+  let input_str_kobetu = ""
+
   const submit = () => {
-    console.log(formData);
-    alert("正常に送信されました！")
+    if (formData.equity === "" || formData.bond === "" || formData.altsCash === "" || formData.return === "" || formData.risk === "") {
+      alert("空欄があるため正常に送信されませんでした。")
+    } else {
+      for (let i=0 ; i<Object.keys(formData).length ; i++){
+        input_str_kobetu+=","
+        input_str_kobetu+=Object.values(formData)[i]
+      }
+      // console.log(input_str_kobetu)
+      axios
+      .get(`http://127.0.0.1:8000/kobetu/${input_str_kobetu}`)
+      .then((res) => {
+        // console.log(res);
+        // APIがうまく動作していない時のエラー
+        if (res.status !== 200) {
+          throw new Error("APIがうまく動作していないようです");
+        }
+      })
+      // alert("正常に送信されました。")
+      props.setIsShow(false);
+      
+    }
   };
+
   if (props.isShow) {
     return (
       <>
-        <form onClick={() => props.setIsShow(false)} className="overlay">
+        <div onClick={() => props.setIsShow(false)} className="overlay">
           <div
             onClick={(e) => e.stopPropagation()}
-            className="content rounded-3xl flex flex-col justify-center gap-7 px-28"
+            className="content rounded-3xl flex flex-col justify-center gap-12 px-28"
           >
             <div className="flex gap-6 items-center">
               <span>equity</span>
@@ -105,13 +131,13 @@ export default function Modal(props) {
                 送信
               </button>
             </div>
-            <div>
+            {/* <div>
               <p className="flex justify-center text-red-600">
                 *個別銘柄を選んでいないときは空欄のままにしておいて下さい*
               </p>
-            </div>
+            </div> */}
           </div>
-        </form>
+        </div>
       </>
     );
   } else {

@@ -1,20 +1,80 @@
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import StockImg_1 from "../images/stock_img_1.jpg";
-import StockImg_2 from "../images/stock_img_2.jpg";
-import StockImg_3 from "../images/stock_img_3.jpg";
-import { useNavigate } from "react-router-dom";
+// import StockImg_3 from "../images/stock_img_.jpg";
+import oresengraph4 from "../images2/oresen.jpg"
+import scatteroresengraph3 from "../images2/scatteroresen.jpg"
+import tumitate_bougraph2 from "../images2/tumitate_bou.jpg"
+import tumitate_wariaigraph5 from "../images2/tumitate_wariai.jpg"
+import scatterline from "../images2/scatterline.jpg"
+import simulation from "../images/simulation.pdf"
+
+import { useNavigate,Navigate } from "react-router-dom";
+import axios from 'axios'
+import { useAuthContext } from '../context/AuthContext';
+import { auth } from '../firebase';
 
 export default function Simulation() {
   const navigate = useNavigate();
+  const { user } = useAuthContext();
+  const handleLogout = () => {
+    auth.signOut();
+    navigate("/");
+  };
+  
+
+  
+  // React.useEffect(() => {
+  //   axios.get("http://127.0.0.1:8000/image4").then((res) => {
+	// 		// binary_setData(res.blob());
+  //     // var blobURL = URL.createObjectURL(res.data);
+  //     console.log(res)
+  //       // var image = document.getElementById("myImage");
+       
+  //       // image.src = blobURL;
+      
+
+	// 	});
+    
+   
+  // }, []);
+  // function getBase64Image(){
+
+  //   const base64image = window.URL.createObjectURL(binary_data);
+
+
+
+  // }
+  
+
+  
+  
+
+ 
+  // const img = document.querySelector('img')
+  
+
+  // const getBase64Image = async () => {
+  //   const responce = await axios.get(`http://127.0.0.1:8000/image4`);
+  //   binary_setData(responce.blob());
+  // };
+
+  if (!user) {
+    return <Navigate to="/" />;
+    
+  }else{
+
+
   return (
     <>
+    <div className="flex flex-row-reverse my-8 w-full">
+          <button onClick={handleLogout} className="bg-gray-400 text-white  px-6 py-1 rounded hover:bg-deepBlue">ログアウト</button>
+    </div>
       <div className="flex justify-between items-center my-4">
         <button onClick={() => navigate("/SelectedBrand")} className="border rounded bg-gray-400 text-white px-6 py-2 mx-4 hover:bg-deepBlue">戻る</button>
-        <button className="bg-orange-400 text-lg text-white px-8 py-1 mx-4 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition">
+        <a href={simulation} download="simulation.pdf"className="bg-orange-400 text-lg text-white px-8 py-1 mx-4 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition">
           PDF出力
-        </button>
+        </a>
       </div>
       <Tabs>
         <TabList>
@@ -24,8 +84,9 @@ export default function Simulation() {
         </TabList>
 
         <TabPanel>
-          <img name="stock_img_1" src={StockImg_1} className="my-12" />
-        </TabPanel>
+          <img  name="tumitate_bougraph2" src={tumitate_bougraph2} className="my-12" alt='画像の2'/>
+          <img  name="scatteroresengraph3" src={scatteroresengraph3} className="my-12"alt='画像の3' />
+          </TabPanel>
         <TabPanel>
           <div>
             <div className="bg-gray-200 px-4 py-2 text-xs">
@@ -62,7 +123,10 @@ export default function Simulation() {
                 </span>
               </div>
             </div>
-            <img name="stock_img_2" src={StockImg_2} />
+            <img name="oresengraph4" src={oresengraph4} alt='画像の4'/>
+            <img name="tumitate_wariaigraph5" src={tumitate_wariaigraph5}alt='画像の5' />
+            <img name="scatterline" src={scatterline}alt='画像の6' />
+
           </div>
         </TabPanel>
         <TabPanel>
@@ -78,10 +142,11 @@ export default function Simulation() {
                 ※情報の正確性には万全を期しておりますが、その内容の正確性、完全性、信頼性を保証するものではありません。本シュミレーション及び記載された情報を利用することで生じるいかなる損害(直接的、間接的を問わず)についても、当社は一切の責任を負うものではありません。実際の資産運用や投資判断に当たっては、必ずご自身の責任において最終的に判断してください。
               </p>
             </div>
-            <img name="stock_img_3" src={StockImg_3} className="my-12" />
+            {/* <img name="stock_img_3" src={StockImg_3} className="my-12" /> */}
           </div>
         </TabPanel>
       </Tabs>
     </>
   );
+}
 }

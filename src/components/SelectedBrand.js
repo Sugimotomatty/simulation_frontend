@@ -1,28 +1,41 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,Navigate} from "react-router-dom";
 import Data from "./Data.js";
 import SelectedCard from "./SelectedCard.js";
 import Alert from "./Alert";
 import SingleBrandModal from "./SingleBrandModal";
 import axios from 'axios'
+import { useAuthContext } from '../context/AuthContext';
+import { auth } from '../firebase';
+
 
 
 export default function SelectedBrand() {
-  const navigate = useNavigate();
   const [isShow, setIsShow] = React.useState(false);
   const [isAlert, setIsAlert] = React.useState(false);
+  const [isKobetu, setIsKobetu] = React.useState(false);
   const [isHandleDrop, setIsHandleDrop] = React.useState("");
   // ここから下スギモト
-  // const [data, setData] = React.useState("");
-  
-	// const url = "http://127.0.0.1:8000/api";
+  const [data, setData] = React.useState("");
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
 
-	// const GetData = () => {
-	// 	axios.get(url).then((res) => {
-	// 		setData(res.data);
-	// 	});
-	// };
- 
+//message
+  const incheck_array = [];
+
+  const handleLogout = () => {
+    auth.signOut();
+    navigate("/");
+  };
+  
+	const url = "http://127.0.0.1:8000/api/";
+
+  React.useEffect(() => {
+    axios.get(url).then((res) => {
+			setData(res.data);
+		});
+   
+  }, []);
 
 // ここまで
 
@@ -35,56 +48,134 @@ export default function SelectedBrand() {
   //     setIsActive((prevActive) => prevActive = false);
   //   }
   // }
+
+  function showSingleBrandButton() {
+    if (isHandleDrop === "k") {
+      setIsShow((prevShow) => (prevShow = true));
+    } else {
+      
+      alert("個別銘柄を選択してください。");
+    }
+  }
+
+  
  
 
-  function showFunc() {
-    console.log(isHandleDrop);
+
+  let input_str = ""
+
+  function get_input_value(){
+    const input_value_tanka_suuryou = document.getElementsByClassName("p-1");
+  
+    let input_values_obj = []
     
+    for (let i=0 ; i<input_value_tanka_suuryou.length ; i++){
+
+      if (input_value_tanka_suuryou[i]){
+        input_values_obj.push(input_value_tanka_suuryou[i].value);
+      }
+
+    }
+
+    const input_value_ukewatasi_doruen = document.getElementsByClassName("border border-black rounded  mt-2 px-5 py-2");
+
+    let ukewatasi = input_value_ukewatasi_doruen[0].value //受け渡しの日付
+    let doruen = input_value_ukewatasi_doruen[1].value //ドル円
+
+    input_str+= ","
+    input_str += ukewatasi
+
+    input_str+= ","
+    input_str += doruen
+ 
+
+    for (let i =0;i <input_values_obj.length;i++){
+      
+      input_str+= ","
+      input_str = input_str + String(input_values_obj[i])
+    };
+
+
+    //kobetuを選択したらこれ
+    if(isHandleDrop === "k"){
+      axios.get("http://127.0.0.1:8000/api/kobetu").then((res) => {
+
+        console.log(res.data.kobetu)
+
+        if (res.data.kobetu.length===0){
+          setIsAlert(false);
+          
+          alert('個別選択詳細が未入力です。')
+          
+        }else{
+          input_str+=res.data.kobetu
+        console.log(input_str);
+  
+        axios
+        .get(`http://127.0.0.1:8000/input_str/insert/${input_str}`)
+        .then((res) => {
+          // console.log(res);
+          // APIがうまく動作していない時のエラー
+          if (res.status !== 200) {
+            throw new Error("APIがうまく動作していないようです");
+          }
+        })
+
+        }   
+        
+    })
+
+    }
+   
+  
   }
+
+ 
 
 
 
   const selectedCards = Data.map((item, index) => {
     // ここから下スギモト
-    // if (typeof data.message ==="object"){
+    if (typeof data.message ==="object"){
       
-    //   for (let i=0;i<data.message.length;i++){
-    //     if (index+1=== data.message[i]) {
+      for (let i=0;i<data.message.length;i++){
+        if (index+1=== data.message[i]) {
          
-          //ここまで
          
- 
-         return ( 
-         
+          if (incheck_array.includes( data.message[i])===false){
+           
 
-          
+            incheck_array.push( data.message[i]);
+           //ここまで
            
-           
-          <SelectedCard
+   
+           return ( 
+               <SelectedCard
+              
+               key={index}
+               id={item.id}
+               issuer={item.issuer}
+               currency={item.currency}
+               type={item.type}
+               rank={item.rank}
+               call={item.call}
+               returnDay={item.returnDay}
+               cp={item.cp}
+               interestDay={item.interestDay}
+             />
             
-             key={index}
-             id={item.id}
-             issuer={item.issuer}
-             currency={item.currency}
-             type={item.type}
-             rank={item.rank}
-             call={item.call}
-             returnDay={item.returnDay}
-             cp={item.cp}
-             interestDay={item.interestDay}
-           />
-          
-         );
+           );
+
+          }
+         
 
          //ここから下スギモト
- 
-
-      // }
+         }
      
-      // }
+      }
 
        
-      // }
+      }
      //ここまでスギモト
     }
     
@@ -96,21 +187,23 @@ export default function SelectedBrand() {
     
        
 
-  
+if (!user) {
+  return <Navigate to="/" />;
+}else{
 
 
   return (
     <>
-      <main >
+    <main >
+
+      <div className="flex flex-row-reverse ">
+        <button onClick={handleLogout} className="bg-gray-400 text-white  px-6 py-1 rounded hover:bg-deepBlue">ログアウト</button>
+        
+      </div>
         
         <div className="flex gap-4" >
-          {/* ここから下スギモト */}
-        {/* <div> 
-			 <div>ここに処理を書いていきます</div>
-			{data ? <div>{data.message}</div> : <button onClick={GetData}>データを取得</button>}
-		</div> */}
-    {/* ここまで */}
           <div className="flex flex-col mb-6">
+
             <label className="mb-2">積み立て投資先</label>
             
            
@@ -118,7 +211,6 @@ export default function SelectedBrand() {
               id="pet-select"
               onChange={(e) => {
                 setIsHandleDrop(e.target.value);
-                // showSingleBrandButton();
               }}
               className="rounded border border-black w-52 px-4 py-2"
             >
@@ -128,11 +220,11 @@ export default function SelectedBrand() {
               <option value="3">LowRisk</option>
               <option value="4">MiddleRisk</option>
               <option value="5">HighRisk</option>
-              <option value="">個別銘柄</option>
+              <option value="k">個別銘柄</option>
             </select>
           </div>
           <button
-            onClick={() => setIsShow(true)}
+            onClick={() => showSingleBrandButton()}
             className={`mt-8 h-10 bg-gray-400 text-white mx-8 px-8 rounded hover:bg-deepBlue`}
           >
             個別選択詳細
@@ -155,16 +247,31 @@ export default function SelectedBrand() {
               className="border border-black rounded  mt-2 px-5 py-2"
             ></input>
           </div>
-          <button
-            onClick={() => navigate("/Brand")}
+          {/* <button
+            onClick={
+              () => {
+                axios.get(`http://127.0.0.1:8000/reset/`)
+                navigate("/Brand")}}
             className="h-10 bg-gray-400 text-white mx-8 px-8 rounded hover:bg-deepBlue"
           >
             戻る
-          </button>
+          </button> */}
           <button
-            onClick={() => {
-              setIsAlert(true);
-              showFunc();
+            onClick={() =>{
+
+              get_input_value();
+              console.log(input_str)
+              if(input_str.indexOf(',,')===-1 &&input_str.slice(-1)!==','&&isHandleDrop!==""){
+                setIsAlert(true);
+
+                }else{
+                
+                alert('空欄があるため正常に送信されませんでした。');
+
+              }
+             
+             
+              
               
             }}
             className="h-10 bg-gray-400 text-white px-8 rounded hover:bg-deepBlue"
@@ -204,17 +311,21 @@ export default function SelectedBrand() {
               <th>(円相当額)</th>
             </tr>
           </thead>
-          <tbody>{selectedCards}</tbody>
+          <tbody >
+           
+            {selectedCards}
+            </tbody>
         </table>
         <SingleBrandModal isShow={isShow} setIsShow={setIsShow}/>
         <Alert
           isAlert={isAlert}
           setIsAlert={setIsAlert}
           message="シュミレーションを行いますか？"
-          alert="*結果の出力には15秒ほどかかります*"
+          alert="*結果の出力には25秒ほどかかります*"
         />
 
       </main>
     </>
   );
+}
 }
