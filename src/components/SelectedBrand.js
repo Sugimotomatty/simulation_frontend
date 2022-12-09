@@ -5,8 +5,7 @@ import SelectedCard from "./SelectedCard.js";
 import Alert from "./Alert";
 import SingleBrandModal from "./SingleBrandModal";
 import axios from 'axios'
-import { useAuthContext } from '../context/AuthContext';
-import { auth } from '../firebase';
+
 
 
 
@@ -17,16 +16,13 @@ export default function SelectedBrand() {
   const [isHandleDrop, setIsHandleDrop] = React.useState("");
   // ここから下スギモト
   const [data, setData] = React.useState("");
-  const { user } = useAuthContext();
+  
   const navigate = useNavigate();
 
 //message
   const incheck_array = [];
 
-  const handleLogout = () => {
-    auth.signOut();
-    navigate("/");
-  };
+  
   
 	const url = "http://127.0.0.1:8000/api/";
 
@@ -187,9 +183,7 @@ export default function SelectedBrand() {
     
        
 
-if (!user) {
-  return <Navigate to="/" />;
-}else{
+
 
 
   return (
@@ -197,7 +191,7 @@ if (!user) {
     <main >
 
       <div className="flex flex-row-reverse ">
-        <button onClick={handleLogout} className="bg-gray-400 text-white  px-6 py-1 rounded hover:bg-deepBlue">ログアウト</button>
+       
         
       </div>
         
@@ -327,5 +321,4 @@ if (!user) {
       </main>
     </>
   );
-}
 }

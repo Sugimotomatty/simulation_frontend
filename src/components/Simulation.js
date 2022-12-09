@@ -11,16 +11,11 @@ import simulation from "../images/simulation.pdf"
 
 import { useNavigate,Navigate } from "react-router-dom";
 import axios from 'axios'
-import { useAuthContext } from '../context/AuthContext';
-import { auth } from '../firebase';
+
 
 export default function Simulation() {
   const navigate = useNavigate();
-  const { user } = useAuthContext();
-  const handleLogout = () => {
-    auth.signOut();
-    navigate("/");
-  };
+  
   
 
   
@@ -59,16 +54,12 @@ export default function Simulation() {
   //   binary_setData(responce.blob());
   // };
 
-  if (!user) {
-    return <Navigate to="/" />;
-    
-  }else{
-
+ 
 
   return (
     <>
     <div className="flex flex-row-reverse my-8 w-full">
-          <button onClick={handleLogout} className="bg-gray-400 text-white  px-6 py-1 rounded hover:bg-deepBlue">ログアウト</button>
+        
     </div>
       <div className="flex justify-between items-center my-4">
         <button onClick={() => navigate("/SelectedBrand")} className="border rounded bg-gray-400 text-white px-6 py-2 mx-4 hover:bg-deepBlue">戻る</button>
@@ -148,5 +139,4 @@ export default function Simulation() {
       </Tabs>
     </>
   );
-}
 }

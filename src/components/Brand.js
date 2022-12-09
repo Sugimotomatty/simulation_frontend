@@ -6,8 +6,6 @@ import Card from "./Card";
 import { useNavigate , Navigate} from "react-router-dom";
 //スギモトのimport 
 import axios from 'axios';
-import { useAuthContext } from '../context/AuthContext';
-import { auth } from '../firebase';
 
 
 export default function Brand() {
@@ -16,12 +14,7 @@ export default function Brand() {
   const navigate = useNavigate();
 
   
-  const { user } = useAuthContext();
-  const handleLogout = () => {
-    auth.signOut();
-    navigate("/");
-  };
-
+ 
 
   const cards = data.map((item, index) => {
     return (
@@ -86,27 +79,17 @@ export default function Brand() {
   }
 
 
-  if (!user) {
-    return <Navigate to="/" />;
-    
-  }else{
-    console.log(user.email);
 
   return (
     <main>
        <div className="flex flex-row-reverse my-8 w-full">
-          <p className="text-2xl">こんにちは{user.email}さん</p>
+         
         </div>
        <div className="flex flex-row-reverse my-8 w-full justify-between">
-          <button onClick={handleLogout} className="bg-gray-400 text-white  px-6 py-1 rounded hover:bg-deepBlue">ログアウト</button>
+         
 
-          { user.email === "contact@japan-am.info" ?<button
-                onClick={() => navigate("/SignUp")}
-                className="bg-gray-600 bg-opacity-50 text-white px-10 py-1 rounded hover:bg-deepBlue"
-               
-              >  
-                sign up
-              </button> : <p></p> }
+        
+             
 
           
         </div>
@@ -164,5 +147,4 @@ export default function Brand() {
       />
     </main>
   );
-}
 }
