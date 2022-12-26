@@ -24,11 +24,16 @@ export default function SelectedBrand() {
 
   
   
-	const url = "http://127.0.0.1:8000/api/";
+	const url = "https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api";
 
   React.useEffect(() => {
     axios.get(url).then((res) => {
-			setData(res.data);
+      if (res.status !== 200) {
+        throw new Error("APIがうまく動作していないようです");
+      }else{
+        setData(res.data);
+      }
+			
 		});
    
   }, []);
@@ -94,7 +99,7 @@ export default function SelectedBrand() {
 
     //kobetuを選択したらこれ
     if(isHandleDrop === "k"){
-      axios.get("http://127.0.0.1:8000/api/kobetu").then((res) => {
+      axios.get("https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api/kobetu").then((res) => {
 
         console.log(res.data.kobetu)
 
@@ -108,7 +113,7 @@ export default function SelectedBrand() {
         console.log(input_str);
   
         axios
-        .get(`http://127.0.0.1:8000/input_str/insert/${input_str}`)
+        .get(`https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/sendinputstr/${input_str}`)
         .then((res) => {
           // console.log(res);
           // APIがうまく動作していない時のエラー
@@ -125,9 +130,6 @@ export default function SelectedBrand() {
    
   
   }
-
- 
-
 
 
   const selectedCards = Data.map((item, index) => {
@@ -315,7 +317,7 @@ export default function SelectedBrand() {
           isAlert={isAlert}
           setIsAlert={setIsAlert}
           message="シュミレーションを行いますか？"
-          alert="*結果の出力には25秒ほどかかります*"
+          alert="*結果の出力には15秒ほどかかります*"
         />
 
       </main>

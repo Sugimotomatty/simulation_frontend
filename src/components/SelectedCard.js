@@ -6,13 +6,13 @@ export default function SelectedCard(props) {
 
   const [data_rimawari, setData_rimawari] = React.useState("利回りを計算する");
   
-  function rimawari_calculate(suuji){
-    axios.get("http://127.0.0.1:8000/rimawari_quants").then((res) => {
-			setData_rimawari(res.data.rimawari);
-		});
-    return data_rimawari
+  // function rimawari_calculate(suuji){
+  //   axios.get("http://127.0.0.1:8000/rimawari_quants").then((res) => {
+	// 		setData_rimawari(res.data.rimawari);
+	// 	});
+  //   return data_rimawari
 
-  }
+  // }
   const [inputValue, setInputValue] = useState('利回りを計算する')
   const [inputValue2, setInputValue2] = useState('おお')
 
@@ -57,7 +57,8 @@ export default function SelectedCard(props) {
         <td>{props.returnDay}</td>
         <td>{props.cp}</td>
         <td className="px-2">
-          <input type="number" placeholder="数値を入力してください" className="p-1" onChange={e => setInputValue(rimawari_calculate(e.target.value))}></input>
+          <input type="number" placeholder="数値を入力してください" className="p-1" ></input>
+          {/* onChange={e => setInputValue(rimawari_calculate(e.target.value))} 上の行に入れてる*/}
         </td>
         <td className="text-xs">{props.interestDay}</td>
         <td className="px-2">

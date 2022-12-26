@@ -30,9 +30,11 @@ const handleChange = (e) => {
         input_str_kobetu+=","
         input_str_kobetu+=Object.values(formData)[i]
       }
-      // console.log(input_str_kobetu)
+      console.log(input_str_kobetu)
+
+     
       axios
-      .get(`http://127.0.0.1:8000/kobetu/${input_str_kobetu}`)
+      .get(`https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/kobetu/${input_str_kobetu}`)
       .then((res) => {
         // console.log(res);
         // APIがうまく動作していない時のエラー
@@ -40,7 +42,7 @@ const handleChange = (e) => {
           throw new Error("APIがうまく動作していないようです");
         }
       })
-      // alert("正常に送信されました。")
+      alert("正常に送信されました。")
       props.setIsShow(false);
       
     }

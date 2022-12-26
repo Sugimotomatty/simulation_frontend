@@ -2,11 +2,11 @@ import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 // import StockImg_3 from "../images/stock_img_.jpg";
-import oresengraph4 from "../images2/oresen.jpg"
-import scatteroresengraph3 from "../images2/scatteroresen.jpg"
-import tumitate_bougraph2 from "../images2/tumitate_bou.jpg"
-import tumitate_wariaigraph5 from "../images2/tumitate_wariai.jpg"
-import scatterline from "../images2/scatterline.jpg"
+// import oresengraph4 from "../images2/oresen.jpg"
+// import scatteroresengraph3 from "../images2/scatteroresen.jpg"
+// import tumitate_bougraph2 from "../images2/tumitate_bou.jpg"
+// import tumitate_wariaigraph5 from "../images2/tumitate_wariai.jpg"
+// import scatterline from "../images2/scatterline.jpg"
 import simulation from "../images/simulation.pdf"
 
 import { useNavigate,Navigate } from "react-router-dom";
@@ -15,7 +15,11 @@ import axios from 'axios'
 
 export default function Simulation() {
   const navigate = useNavigate();
-  
+  const oresengraph4          = "https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/oresen.jpg"
+  const scatteroresengraph3   = "https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/scatter_oresen.jpg"
+  const tumitate_bougraph2    = "https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_bou.jpg"
+  const tumitate_wariaigraph5 = "https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_wariai.jpg"
+  const scatterline           = "https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/scatterline.jpg"
   
 
   

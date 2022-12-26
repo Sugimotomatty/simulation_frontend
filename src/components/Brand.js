@@ -56,13 +56,22 @@ export default function Brand() {
     // console.log(selectedNum);
 
 
-    //以下スギモトが書いた
-    axios.get(`http://127.0.0.1:8000/reset/`)
+    // //以下スギモトが書いた
+    // axios.get(`http://127.0.0.1:8000/reset/`)
+
+    let selectNum_str = ''
+    for (let i = 0;i<selectedNum.length;i++){
+      selectNum_str += String(selectedNum[i])
+      selectNum_str +=','
+
+    }
+    selectNum_str = selectNum_str.slice(0,-1)
+    console.log(selectNum_str)
     
 
-      for (let i =0;i <selectedNum.length;i++){
+      // for (let i =0;i <selectedNum.length;i++){
         axios
-      .get(`http://127.0.0.1:8000/test/${selectedNum[i]}`)
+      .get(`https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/input/${selectNum_str}`)
       .then((res) => {
         // console.log(res);
         // APIがうまく動作していない時のエラー
@@ -71,7 +80,7 @@ export default function Brand() {
         }
       })
   
-      };
+      // };
 
     
     //ここまでスギモトが書いた
@@ -87,12 +96,7 @@ export default function Brand() {
         </div>
        <div className="flex flex-row-reverse my-8 w-full justify-between">
          
-
-        
-             
-
-          
-        </div>
+         </div>
         
         <div className="flex justify-between ">
           <button
