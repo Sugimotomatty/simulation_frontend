@@ -17,7 +17,7 @@ import axios from 'axios'
 export default function Simulation() {
 
   const timestamp = new Date().toLocaleString()
-  console.log(timestamp);
+  
   const navigate = useNavigate();
   const oresengraph4          = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/oresen.jpg?${timestamp}`
   const scatteroresengraph3   = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/scatter_oresen.jpg?${timestamp}`

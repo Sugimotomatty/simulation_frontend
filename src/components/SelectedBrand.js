@@ -8,7 +8,6 @@ import axios from 'axios'
 
 
 
-
 export default function SelectedBrand() {
   const [isShow, setIsShow] = React.useState(false);
   const [isAlert, setIsAlert] = React.useState(false);
@@ -65,7 +64,8 @@ export default function SelectedBrand() {
 
   let input_str = ""
 
-  function get_input_value(){
+  async function get_input_value(){
+    input_str = ""
     const input_value_tanka_suuryou = document.getElementsByClassName("p-1");
   
     let input_values_obj = []
@@ -99,9 +99,7 @@ export default function SelectedBrand() {
 
     //kobetuを選択したらこれ
     if(isHandleDrop === "k"){
-      axios.get("https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api/kobetu").then((res) => {
-
-        console.log(res.data.kobetu)
+      await axios.get("https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api/kobetu").then((res) => {
 
         if (res.data.kobetu.length===0){
           setIsAlert(false);
@@ -110,7 +108,49 @@ export default function SelectedBrand() {
           
         }else{
           input_str+=res.data.kobetu
-        console.log(input_str);
+        }
+      })
+
+      console.log(input_str)
+
+    }else if(isHandleDrop === "1"){
+      await axios.get("https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com//tumitatetousisakitable").then((res) => {
+        const sandp  = String(res.data.sandp)
+        input_str+=sandp 
+       })
+
+    }else if(isHandleDrop === "2"){
+      await axios.get("https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com//tumitatetousisakitable").then((res) => {
+        const acwi  = String(res.data.acwi)
+        input_str+=acwi 
+    })
+     
+    }else if(isHandleDrop === "3"){
+      await axios.get("https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com//tumitatetousisakitable").then((res) => {
+        const lowrisk  = String(res.data.lowrisk)
+        input_str+=lowrisk 
+       
+    })
+
+    }else if(isHandleDrop === "4"){
+      await axios.get("https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com//tumitatetousisakitable").then((res) => {
+
+      const middlerisk  = String(res.data.middlerisk)
+      input_str+=middlerisk 
+
+    })
+
+    }else if(isHandleDrop === "5"){
+      await axios.get("https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com//tumitatetousisakitable").then((res) => {
+      
+      const highrisk  = String(res.data.highrisk)
+      input_str+= highrisk 
+    })
+  }
+
+
+    // console.log(input_str)
+        
   
         axios
         .get(`https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/sendinputstr/${input_str}`)
@@ -121,19 +161,10 @@ export default function SelectedBrand() {
             throw new Error("APIがうまく動作していないようです");
           }
         })
-
-        }   
-        
-    })
-
-    }
-   
-  
   }
 
 
   const selectedCards = Data.map((item, index) => {
-    // ここから下スギモト
     if (typeof data.message ==="object"){
       
       for (let i=0;i<data.message.length;i++){
@@ -243,23 +274,22 @@ export default function SelectedBrand() {
               className="border border-black rounded  mt-2 px-5 py-2"
             ></input>
           </div>
-          {/* <button
+          <button
             onClick={
               () => {
-                axios.get(`http://127.0.0.1:8000/reset/`)
                 navigate("/Brand")}}
             className="h-10 bg-gray-400 text-white mx-8 px-8 rounded hover:bg-deepBlue"
           >
             戻る
-          </button> */}
+          </button>
           <button
             onClick={() =>{
 
-              get_input_value();
-              console.log(input_str)
+              get_input_value()
+             
+              
               if(input_str.indexOf(',,')===-1 &&input_str.slice(-1)!==','&&isHandleDrop!==""){
                 setIsAlert(true);
-
                 }else{
                 
                 alert('空欄があるため正常に送信されませんでした。');
