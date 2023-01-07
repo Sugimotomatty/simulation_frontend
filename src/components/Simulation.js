@@ -24,7 +24,8 @@ export default function Simulation() {
   const tumitate_bougraph2    = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_bou.jpg?${timestamp}`
   const tumitate_wariaigraph5 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_wariai.jpg?${timestamp}`
   const scatterline           = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/scatterline.jpg?${timestamp}`
-  
+  const image_chart1          =`https://drive.google.com/uc?export=view&id=1BpoWfhiM3AYTuaVTMNcJfpHRaF1ipyGf&usp=sharing?${timestamp}`
+  //1BpoWfhiM3AYTuaVTMNcJfpHRaF1ipyGf
 
   
   // React.useEffect(() => {
@@ -143,6 +144,7 @@ export default function Simulation() {
             </div>
             {/* <img name="stock_img_3" src={StockImg_3} className="my-12" /> */}
           </div>
+          <img  name="image_chart1" src={image_chart1} className="my-12" alt='画像7'/>
         </TabPanel>
       </Tabs>
     </>
