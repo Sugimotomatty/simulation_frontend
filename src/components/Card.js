@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 export default function Card(props) {
   // const [isChecked, setIsChecked] = React.useState(false);
@@ -11,11 +11,11 @@ export default function Card(props) {
   return (
     <>
       <tr>
-        <td className="bg-gray-400">
+        <td className='bg-gray-400'>
           <input
-            type="checkbox"
-            className="checks"
-            value="aaaa"
+            type='checkbox'
+            className='checks'
+            value='aaaa'
             // checked={isChecked}
             // onChange={handleClick}
           ></input>
@@ -31,5 +31,5 @@ export default function Card(props) {
         <td>{props.interestDay}</td>
       </tr>
     </>
-  );
+  )
 }
