@@ -44,7 +44,6 @@ export default function Simulation() {
     })
   }, [])
 
-  console.log(rikindata[0])
 
   
 
@@ -78,34 +77,36 @@ export default function Simulation() {
     }
     
   })
-  
-console.log(rikindata.length);
-  const afterSimulationRikin = rikindata.map((item, index) => {
-          console.log(item.oneyear);
 
-            return (
-              <AfterSimulationRikinTsumitate
-             index    = {item.oneyear}
-             name     = {item.oneyear}
-             oneyear  = {item.oneyear}
-             twoyear  = {item.twoyear}
-             threeyear= {item.threeyear}
-             fouryear = {item.fouryear}
-             fiveyear = {item.fiveyear}
-             sixyear  = {item.sixyear}
-             sevenyear= {item.sevenyear}
-             eightyear= {item.eightyear}
-             nineyear = {item.nineyear}
-             tenyear  = {item.tenyear}
-             />
-            )
-            
-          })
-        
+  if (rikindata.length!=0){
+   var afterSimulationRikin = rikindata.map((item, index) => {
+
+
+       
+
+      return (
+        <AfterSimulationRikinTsumitate
+       index    = {item.oneyear}
+       name     = {item.oneyear}
+       oneyear  = {item.oneyear}
+       twoyear  = {item.twoyear}
+       threeyear= {item.threeyear}
+       fouryear = {item.fouryear}
+       fiveyear = {item.fiveyear}
+       sixyear  = {item.sixyear}
+       sevenyear= {item.sevenyear}
+       eightyear= {item.eightyear}
+       nineyear = {item.nineyear}
+       tenyear  = {item.tenyear}
+       />
+      )
       
+    })
+  
 
+  }else{var afterSimulationRikin=""}
 
-   
+      
 
 
   return (
@@ -264,6 +265,7 @@ console.log(rikindata.length);
                 
               </tr>
             
+              
               {afterSimulationRikin}
             </tbody>
           </table>
