@@ -20,11 +20,12 @@ export default function Simulation() {
   const tumitate_wariaigraph5 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_wariai.jpg?${timestamp}`
   const scatterline = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/scatterline.jpg?${timestamp}`
   const [data, setData] = React.useState('')
+  const [rikindata,setrikinData] =React.useState('')
   const incheck_array = []
-  const url = 'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api'
-
+  const url_api = 'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api'
+  const url_rikin = 'https://script.google.com/macros/s/AKfycbyOV5V7KfkWxIOoJxOLAf_u2pn_befMmpVt786LwHXBPh4VvvSA8sscO9i9HiU-xShq/exec'
   React.useEffect(() => {
-    axios.get(url).then((res) => {
+    axios.get(url_api).then((res) => {
       if (res.status !== 200) {
         throw new Error('APIがうまく動作していないようです')
       } else {
@@ -32,6 +33,20 @@ export default function Simulation() {
       }
     })
   }, [])
+
+  React.useEffect(() => {
+    axios.get(url_rikin).then((res) => {
+      if (res.status !== 200) {
+        throw new Error('APIがうまく動作していないようです')
+      } else {
+        setrikinData(res.data.afterRikin)
+      }
+    })
+  }, [])
+
+  console.log(rikindata[0])
+
+  
 
   const afterSimulationPortFolios = Data.map((item, index) => {
     if (typeof data.message === 'object') {
@@ -61,8 +76,36 @@ export default function Simulation() {
         }
       }
     }
-    //ここまでスギモト
+    
   })
+  
+console.log(rikindata.length);
+  const afterSimulationRikin = rikindata.map((item, index) => {
+          console.log(item.oneyear);
+
+            return (
+              <AfterSimulationRikinTsumitate
+             index    = {item.oneyear}
+             name     = {item.oneyear}
+             oneyear  = {item.oneyear}
+             twoyear  = {item.twoyear}
+             threeyear= {item.threeyear}
+             fouryear = {item.fouryear}
+             fiveyear = {item.fiveyear}
+             sixyear  = {item.sixyear}
+             sevenyear= {item.sevenyear}
+             eightyear= {item.eightyear}
+             nineyear = {item.nineyear}
+             tenyear  = {item.tenyear}
+             />
+            )
+            
+          })
+        
+      
+
+
+   
 
 
   return (
@@ -220,7 +263,8 @@ export default function Simulation() {
                 <td>10年目</td>
                 
               </tr>
-             <AfterSimulationRikinTsumitate/>
+            
+              {afterSimulationRikin}
             </tbody>
           </table>
         </TabPanel>

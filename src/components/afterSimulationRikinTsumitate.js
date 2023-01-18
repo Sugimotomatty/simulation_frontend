@@ -5,20 +5,19 @@ export default function AfterSimulationRikinTsumitate(props) {
   return (
     <>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td className='px-2'>
-          単価
-        </td>
-        <td className='text-xs'>{props.interestDay}</td>
-        <td className='text-xs'>購入数量</td>
-        <td className='text-xs'>購入金額</td>
+        <td>{props.index}</td>
+        <td>{props.name}</td>
+        <td>{props.oneyear}</td>
+        <td>{props.twoyear}</td>
+        <td>{props.threeyear}</td>
+        <td>{props.fouryear}</td>
+        <td>{props.fiveyear}</td>
+        <td>{props.sixyear}</td>
+        <td>{props.sevenyear}</td>
+        <td>{props.eightyear}</td>
+        <td>{props.nineyear}</td>
+        <td>{props.tenyear}</td>
+        
       </tr>
     </>
   )
