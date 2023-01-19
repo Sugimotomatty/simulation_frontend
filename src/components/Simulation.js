@@ -20,27 +20,26 @@ export default function Simulation() {
   const tumitate_bougraph2 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_bou.jpg?${timestamp}`
   const tumitate_wariaigraph5 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_wariai.jpg?${timestamp}`
   const scatterline = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/scatterline.jpg?${timestamp}`
-  const [data, setData] = React.useState('')
+  const [maindata, setmainData] = React.useState('')
   const [rikindata, setrikinData] = React.useState('')
   const [rikinSumdata, setrikinSumData] = React.useState('')
   const [rikinCulmdata, setrikinCulmData] = React.useState('')
   const incheck_array = []
-  const url_api =
-    'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api'
+  const url_main =
+    'https://script.google.com/macros/s/AKfycbzTc5D39cP2pck36w2RGArQjLS0t2WEWYgoscMerQ7NcnITlXAB61S_OV5qL_2Rl0pdsQ/exec'
   const url_rikin =
     'https://script.google.com/macros/s/AKfycbymDeDmQd7H2Bs7gstahIXu2Faf8Ylf2FNluCexQ-gOGOW6p36ZB_lK8rIw3VTqXMp3/exec'
-
-
-  const url_rikin_sum = 'https://script.google.com/macros/s/AKfycbxKB03z-VCWwgAJsUPpDNSzrKKj90qiNxqfPFA_p_UF3E0FxxopMZLbAZVxleYQ_EmEoQ/exec'  
+  const url_rikin_sum = 
+  'https://script.google.com/macros/s/AKfycbxKB03z-VCWwgAJsUPpDNSzrKKj90qiNxqfPFA_p_UF3E0FxxopMZLbAZVxleYQ_EmEoQ/exec'  
   const url_rikin_Culm =
     'https://script.google.com/macros/s/AKfycbyaqU_oiTf5FRu5BypsBGs4LHJ7W0Obc6KmkA5g3CTInUTNJLjoRDRhzYv4lFULq5JQsg/exec'
 
   React.useEffect(() => {
-    axios.get(url_api).then((res) => {
+    axios.get(url_main).then((res) => {
       if (res.status !== 200) {
         throw new Error('APIがうまく動作していないようです')
       } else {
-        setData(res.data)
+        setmainData(res.data.MainData)
       }
     })
   }, [])
@@ -77,35 +76,32 @@ export default function Simulation() {
     })
   }, [])
 
-  const afterSimulationPortFolios = Data.map((item, index) => {
-    if (typeof data.message === 'object') {
-      for (let i = 0; i < data.message.length; i++) {
-        if (index + 1 === data.message[i]) {
-          if (incheck_array.includes(data.message[i]) === false) {
-            incheck_array.push(data.message[i])
-            //ここまで
+  if (maindata.length != 0) {
+    var afterSimulationmain = maindata.map((item, index) => {
 
             return (
               <AfterSimulationPortFolio
-                key={index}
-                id={item.id}
+                number={item.number}
                 issuer={item.issuer}
                 currency={item.currency}
                 type={item.type}
                 rank={item.rank}
                 call={item.call}
                 returnDay={item.returnDay}
-                cp={item.cp}
-                interestDay={item.interestDay}
+                coupon_rimawari={item.coupon_rimawari}
+                monoprice={item.monoprice}
+                sanko_rimawari={item.sanko_rimawari}
+                interest_day={item.interest_day}
+                amount={item.amount}
+                yen={item.yen}
               />
             )
-          }
+    })
+  }else{var afterSimulationmain = ""}
+          
 
           //ここから下スギモト
-        }
-      }
-    }
-  })
+       
 
   if (rikindata.length != 0) {
     var afterSimulationRikin = rikindata.map((item, index) => {
@@ -157,18 +153,18 @@ export default function Simulation() {
   var afterSimulationRikinSum = rikinSumdata.map((item) => {
     return (
      <AfterSimulationRikinSum 
-        name={item.name}
-        oneyear={item.oneyear}
-        twoyear={item.twoyear}
-        threeyear={item.threeyear}
-        fouryear={item.fouryear}
-        fiveyear={item.fiveyear}
-        sixyear={item.sixyear}
-        sevenyear={item.sevenyear}
-        eightyear={item.eightyear}
-        nineyear={item.nineyear}
-        tenyear={item.tenyear}
-        sum    = {item.sum}
+        name     ={item.name}
+        oneyear  = {item.oneyear}
+        twoyear  = {item.twoyear}
+        threeyear= {item.threeyear}
+        fouryear = {item.fouryear}
+        fiveyear = {item.fiveyear}
+        sixyear  = {item.sixyear}
+        sevenyear= {item.sevenyear}
+        eightyear= {item.eightyear}
+        nineyear = {item.nineyear}
+        tenyear  = {item.tenyear}
+        sum      = {item.sum}
         />
     )
   })
@@ -300,17 +296,18 @@ export default function Simulation() {
                 <th rowSpan='2'>償還日</th>
                 <th rowSpan='2'>クーポン利回り</th>
                 <th rowSpan='2'>単価</th>
+                <th rowSpan='2'>参考利回り</th>
                 <th rowSpan='2'>利払い日</th>
                 <th rowSpan='1'>購入数量</th>
                 <th rowSpan='1'>購入金額</th>
-                <th rowSpan='2'>参考利回り</th>
+               
               </tr>
               <tr>
                 <th>(ドル相当額)</th>
                 <th>(円相当額)</th>
               </tr>
             </thead>
-            <tbody>{afterSimulationPortFolios}</tbody>
+            <tbody>{afterSimulationmain}</tbody>
           </table>
 
           <table className='my-8 w-full divide-solid'>

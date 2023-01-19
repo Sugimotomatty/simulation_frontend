@@ -4,24 +4,39 @@ import axios from 'axios'
 export default function AfterSimulationPortFolio(props) {
   return (
     <>
-      <tr>
-        <td>{props.id}</td>
+      <tr className='font-normal'>
+        <td>{props.number }</td>
         <td>{props.issuer}</td>
         <td>{props.currency}</td>
         <td>{props.type}</td>
         <td>{props.rank}</td>
         <td>{props.call}</td>
         <td>{props.returnDay}</td>
-        <td>{props.cp}</td>
+        <td>{props.coupon_rimawari}</td>
         <td className='px-2'>
-          単価
-          {/* onChange={e => setInputValue(rimawari_calculate(e.target.value))} 上の行に入れてる*/}
+          {props.monoprice }
+         
         </td>
-        <td className='text-xs'>{props.interestDay}</td>
-        <td className='text-xs'>購入数量</td>
-        <td className='text-xs'>購入金額</td>
-        <td className='px-2'>参考利回り</td>
+        <td className='px-2'>{props.sanko_rimawari }</td>
+        <td className='text-xs'>{props.interest_day}</td>
+        
+        <td className='text-xs'>{props.amount}</td>
+        <td className='text-xs'>{props.yen}</td>
+        
       </tr>
     </>
   )
 }
+//     number         
+//     issuer         
+//     currency       
+//     type           
+//     rank           
+//     call           
+//     returnDay      
+//     coupon_rimawari
+//     monoprice      
+//     sanko_rimawari 
+//     interest_day   
+//     amount         
+//     yen            

@@ -4,7 +4,7 @@ import axios from 'axios'
 export default function AfterSimulationRikinSum(props) {
   return (
     <>
-      <tr className='bg-slate-400'>
+      <tr className='bg-slate-400 font-bold'>
         <td>{props.name}</td>
         <td>{props.oneyear}</td>
         <td>{props.twoyear}</td>
