@@ -4,6 +4,7 @@ import 'react-tabs/style/react-tabs.css'
 import AfterSimulationPortFolio from './afterSimulationPortFolio'
 import AfterSimulationRikinTsumitate from './afterSimulationRikinTsumitate'
 import AfterSimulationRikinCulm from './afterSimulationRikinCulm'
+import AfterSimulationRikinSum from './afterSimulationRikinSum'
 import Data from './Data.js'
 import simulation from '../images/simulation.pdf'
 import { useEffect, useState } from 'react'
@@ -21,13 +22,16 @@ export default function Simulation() {
   const scatterline = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/scatterline.jpg?${timestamp}`
   const [data, setData] = React.useState('')
   const [rikindata, setrikinData] = React.useState('')
+  const [rikinSumdata, setrikinSumData] = React.useState('')
   const [rikinCulmdata, setrikinCulmData] = React.useState('')
   const incheck_array = []
   const url_api =
     'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api'
   const url_rikin =
-    'https://script.google.com/macros/s/AKfycbyU39xaFpEnkhhV2fSZQxi1YREZZZA7Aqm8POJgxERCMAAb2f7DSiYjeibgqwAiRt1-/exec'
+    'https://script.google.com/macros/s/AKfycbymDeDmQd7H2Bs7gstahIXu2Faf8Ylf2FNluCexQ-gOGOW6p36ZB_lK8rIw3VTqXMp3/exec'
 
+
+  const url_rikin_sum = 'https://script.google.com/macros/s/AKfycbxKB03z-VCWwgAJsUPpDNSzrKKj90qiNxqfPFA_p_UF3E0FxxopMZLbAZVxleYQ_EmEoQ/exec'  
   const url_rikin_Culm =
     'https://script.google.com/macros/s/AKfycbyaqU_oiTf5FRu5BypsBGs4LHJ7W0Obc6KmkA5g3CTInUTNJLjoRDRhzYv4lFULq5JQsg/exec'
 
@@ -47,6 +51,17 @@ export default function Simulation() {
         throw new Error('APIがうまく動作していないようです')
       } else {
         setrikinData(res.data.afterRikin)
+      }
+    })
+  }, [])
+
+
+  React.useEffect(() => {
+    axios.get(url_rikin_sum).then((res) => {
+      if (res.status !== 200) {
+        throw new Error('APIがうまく動作していないようです')
+      } else {
+        setrikinSumData(res.data.afterRikinSum)
       }
     })
   }, [])
@@ -107,16 +122,41 @@ export default function Simulation() {
           eightyear={item.eightyear}
           nineyear={item.nineyear}
           tenyear={item.tenyear}
+          sum = {item.sum}
         />
       )
     })
   } else {
     var afterSimulationRikin = ''
   }
+
   if (rikinCulmdata.length != 0) {
-  var afterSimulationRikinCulm = rikinCulmdata.map((item) => {
+    var afterSimulationRikinCulm = rikinCulmdata.map((item) => {
+      return (
+       <AfterSimulationRikinCulm 
+          name={item.name}
+          oneyear={item.oneyear}
+          twoyear={item.twoyear}
+          threeyear={item.threeyear}
+          fouryear={item.fouryear}
+          fiveyear={item.fiveyear}
+          sixyear={item.sixyear}
+          sevenyear={item.sevenyear}
+          eightyear={item.eightyear}
+          nineyear={item.nineyear}
+          tenyear={item.tenyear}
+          />
+      )
+    })
+  }else{
+    var afterSimulationRikinCulm = ''
+  }
+
+
+  if (rikinSumdata.length != 0) {
+  var afterSimulationRikinSum = rikinSumdata.map((item) => {
     return (
-     <AfterSimulationRikinCulm 
+     <AfterSimulationRikinSum 
         name={item.name}
         oneyear={item.oneyear}
         twoyear={item.twoyear}
@@ -127,11 +167,13 @@ export default function Simulation() {
         sevenyear={item.sevenyear}
         eightyear={item.eightyear}
         nineyear={item.nineyear}
-        tenyear={item.tenyear}/>
+        tenyear={item.tenyear}
+        sum    = {item.sum}
+        />
     )
   })
 }else{
-  var afterSimulationRikinCulm = ''
+  var afterSimulationRikinSum = ''
 }
 
   return (
@@ -289,9 +331,11 @@ export default function Simulation() {
                 <td>8年目</td>
                 <td>9年目</td>
                 <td>10年目</td>
+                <td>合計</td>
               </tr>
 
               {afterSimulationRikin}
+              {afterSimulationRikinSum}
               {afterSimulationRikinCulm}
             </tbody>
           </table>

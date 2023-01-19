@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-export default function AfterSimulationRikinTsumitate(props) {
+export default function AfterSimulationRikinSum(props) {
   return (
     <>
-      <tr>
+      <tr className='bg-slate-400'>
         <td>{props.name}</td>
         <td>{props.oneyear}</td>
         <td>{props.twoyear}</td>
@@ -16,7 +16,7 @@ export default function AfterSimulationRikinTsumitate(props) {
         <td>{props.eightyear}</td>
         <td>{props.nineyear}</td>
         <td>{props.tenyear}</td>
-        <td>{props.sum}</td>
+        <td rowSpan="2" className='bg-white'>{props.sum}</td>
       </tr>
     </>
   )
