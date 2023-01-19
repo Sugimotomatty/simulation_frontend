@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-export default function AfterSimulationRikinTsumitate(props) {
+export default function AfterSimulationRikinCulm(props) {
   return (
     <>
-      <tr>
-        <td>{props.name}</td>
+      <tr className='bg-zinc-300'>
+        <td colSpan='2'>{props.name}</td>
         <td>{props.oneyear}</td>
         <td>{props.twoyear}</td>
         <td>{props.threeyear}</td>

@@ -3,10 +3,10 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import AfterSimulationPortFolio from './afterSimulationPortFolio'
 import AfterSimulationRikinTsumitate from './afterSimulationRikinTsumitate'
+import AfterSimulationRikinCulm from './afterSimulationRikinCulm'
 import Data from './Data.js'
 import simulation from '../images/simulation.pdf'
 import { useEffect, useState } from 'react'
-
 import { useNavigate, Navigate } from 'react-router-dom'
 import axios from 'axios'
 
@@ -20,10 +20,17 @@ export default function Simulation() {
   const tumitate_wariaigraph5 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_wariai.jpg?${timestamp}`
   const scatterline = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/scatterline.jpg?${timestamp}`
   const [data, setData] = React.useState('')
-  const [rikindata,setrikinData] =React.useState('')
+  const [rikindata, setrikinData] = React.useState('')
+  const [rikinCulmdata, setrikinCulmData] = React.useState('')
   const incheck_array = []
-  const url_api = 'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api'
-  const url_rikin = 'https://script.google.com/macros/s/AKfycbyOV5V7KfkWxIOoJxOLAf_u2pn_befMmpVt786LwHXBPh4VvvSA8sscO9i9HiU-xShq/exec'
+  const url_api =
+    'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api'
+  const url_rikin =
+    'https://script.google.com/macros/s/AKfycbyU39xaFpEnkhhV2fSZQxi1YREZZZA7Aqm8POJgxERCMAAb2f7DSiYjeibgqwAiRt1-/exec'
+
+  const url_rikin_Culm =
+    'https://script.google.com/macros/s/AKfycbyaqU_oiTf5FRu5BypsBGs4LHJ7W0Obc6KmkA5g3CTInUTNJLjoRDRhzYv4lFULq5JQsg/exec'
+
   React.useEffect(() => {
     axios.get(url_api).then((res) => {
       if (res.status !== 200) {
@@ -44,8 +51,16 @@ export default function Simulation() {
     })
   }, [])
 
-
-  
+  React.useEffect(() => {
+    axios.get(url_rikin_Culm).then((res) => {
+      if (res.status !== 200) {
+        throw new Error('APIがうまく動作していないようです')
+      } else {
+        setrikinCulmData(res.data.afterRikinCulm)
+       
+      }
+    })
+  }, [])
 
   const afterSimulationPortFolios = Data.map((item, index) => {
     if (typeof data.message === 'object') {
@@ -75,39 +90,49 @@ export default function Simulation() {
         }
       }
     }
-    
   })
 
-  if (rikindata.length!=0){
-   var afterSimulationRikin = rikindata.map((item, index) => {
-
-
-       
-
+  if (rikindata.length != 0) {
+    var afterSimulationRikin = rikindata.map((item, index) => {
       return (
         <AfterSimulationRikinTsumitate
-       index    = {item.oneyear}
-       name     = {item.oneyear}
-       oneyear  = {item.oneyear}
-       twoyear  = {item.twoyear}
-       threeyear= {item.threeyear}
-       fouryear = {item.fouryear}
-       fiveyear = {item.fiveyear}
-       sixyear  = {item.sixyear}
-       sevenyear= {item.sevenyear}
-       eightyear= {item.eightyear}
-       nineyear = {item.nineyear}
-       tenyear  = {item.tenyear}
-       />
+          name={item.name}
+          oneyear={item.oneyear}
+          twoyear={item.twoyear}
+          threeyear={item.threeyear}
+          fouryear={item.fouryear}
+          fiveyear={item.fiveyear}
+          sixyear={item.sixyear}
+          sevenyear={item.sevenyear}
+          eightyear={item.eightyear}
+          nineyear={item.nineyear}
+          tenyear={item.tenyear}
+        />
       )
-      
     })
-  
-
-  }else{var afterSimulationRikin=""}
-
-      
-
+  } else {
+    var afterSimulationRikin = ''
+  }
+  if (rikinCulmdata.length != 0) {
+  var afterSimulationRikinCulm = rikinCulmdata.map((item) => {
+    return (
+     <AfterSimulationRikinCulm 
+        name={item.name}
+        oneyear={item.oneyear}
+        twoyear={item.twoyear}
+        threeyear={item.threeyear}
+        fouryear={item.fouryear}
+        fiveyear={item.fiveyear}
+        sixyear={item.sixyear}
+        sevenyear={item.sevenyear}
+        eightyear={item.eightyear}
+        nineyear={item.nineyear}
+        tenyear={item.tenyear}/>
+    )
+  })
+}else{
+  var afterSimulationRikinCulm = ''
+}
 
   return (
     <>
@@ -250,7 +275,9 @@ export default function Simulation() {
             <thead></thead>
             <tbody>
               <tr>
-                <td>数字</td>
+                <td rowSpan='5' className='bg-blue-900 text-white [writing-mode:vertical-rl]'>
+                  収入
+                </td>
                 <td>銘柄</td>
                 <td>初年度</td>
                 <td>2年目</td>
@@ -262,11 +289,10 @@ export default function Simulation() {
                 <td>8年目</td>
                 <td>9年目</td>
                 <td>10年目</td>
-                
               </tr>
-            
-              
+
               {afterSimulationRikin}
+              {afterSimulationRikinCulm}
             </tbody>
           </table>
         </TabPanel>
