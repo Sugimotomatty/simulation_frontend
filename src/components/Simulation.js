@@ -103,12 +103,12 @@ export default function Simulation() {
                 rank={item.rank}
                 call={item.call}
                 returnDay={item.returnDay}
-                coupon_rimawari={item.coupon_rimawari}
+                coupon_rimawari={(item.coupon_rimawari*100).toFixed(2)}
                 monoprice={item.monoprice}
-                sanko_rimawari={item.sanko_rimawari}
+                sanko_rimawari={(item.sanko_rimawari*100).toFixed(2)}
                 interest_day={item.interest_day}
-                amount={item.amount}
-                yen={item.yen}
+                amount={item.amount.toLocaleString()}
+                yen={(item.yen).toLocaleString()}
               />
             )
     })
@@ -123,17 +123,17 @@ export default function Simulation() {
       return (
         <AfterSimulationRikinTsumitate
           name={item.name}
-          oneyear={item.oneyear}
-          twoyear={item.twoyear}
-          threeyear={item.threeyear}
-          fouryear={item.fouryear}
-          fiveyear={item.fiveyear}
-          sixyear={item.sixyear}
-          sevenyear={item.sevenyear}
-          eightyear={item.eightyear}
-          nineyear={item.nineyear}
-          tenyear={item.tenyear}
-          sum = {item.sum}
+          oneyear={item.oneyear.toLocaleString()}
+          twoyear={item.twoyear.toLocaleString()}
+          threeyear={item.threeyear.toLocaleString()}
+          fouryear={item.fouryear.toLocaleString()}
+          fiveyear={item.fiveyear.toLocaleString()}
+          sixyear={item.sixyear.toLocaleString()}
+          sevenyear={item.sevenyear.toLocaleString()}
+          eightyear={item.eightyear.toLocaleString()}
+          nineyear={item.nineyear.toLocaleString()}
+          tenyear={item.tenyear.toLocaleString()}
+          sum = {item.sum.toLocaleString()}
         />
       )
     })
@@ -146,16 +146,16 @@ export default function Simulation() {
       return (
        <AfterSimulationRikinCulm 
           name={item.name}
-          oneyear={item.oneyear}
-          twoyear={item.twoyear}
-          threeyear={item.threeyear}
-          fouryear={item.fouryear}
-          fiveyear={item.fiveyear}
-          sixyear={item.sixyear}
-          sevenyear={item.sevenyear}
-          eightyear={item.eightyear}
-          nineyear={item.nineyear}
-          tenyear={item.tenyear}
+          oneyear={item.oneyear.toLocaleString()}
+          twoyear={item.twoyear.toLocaleString()}
+          threeyear={item.threeyear.toLocaleString()}
+          fouryear={item.fouryear.toLocaleString()}
+          fiveyear={item.fiveyear.toLocaleString()}
+          sixyear={item.sixyear.toLocaleString()}
+          sevenyear={item.sevenyear.toLocaleString()}
+          eightyear={item.eightyear.toLocaleString()}
+          nineyear={item.nineyear.toLocaleString()}
+          tenyear={item.tenyear.toLocaleString()}
           />
       )
     })
@@ -169,17 +169,17 @@ export default function Simulation() {
     return (
      <AfterSimulationRikinSum 
         name     ={item.name}
-        oneyear  = {item.oneyear}
-        twoyear  = {item.twoyear}
-        threeyear= {item.threeyear}
-        fouryear = {item.fouryear}
-        fiveyear = {item.fiveyear}
-        sixyear  = {item.sixyear}
-        sevenyear= {item.sevenyear}
-        eightyear= {item.eightyear}
-        nineyear = {item.nineyear}
-        tenyear  = {item.tenyear}
-        sum      = {item.sum}
+        oneyear  = {item.oneyear.toLocaleString()}
+        twoyear  = {item.twoyear.toLocaleString()}
+        threeyear= {item.threeyear.toLocaleString()}
+        fouryear = {item.fouryear.toLocaleString()}
+        fiveyear = {item.fiveyear.toLocaleString()}
+        sixyear  = {item.sixyear.toLocaleString()}
+        sevenyear= {item.sevenyear.toLocaleString()}
+        eightyear= {item.eightyear.toLocaleString()}
+        nineyear = {item.nineyear.toLocaleString()}
+        tenyear  = {item.tenyear.toLocaleString()}
+        sum      = {item.sum.toLocaleString()}
         />
     )
   })

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { format } from 'date-fns-tz'
+
 
 export default function AfterSimulationPortFolio(props) {
+  console.log(String(props.returnDay))
   return (
     <>
       <tr className='font-normal'>
@@ -12,12 +15,12 @@ export default function AfterSimulationPortFolio(props) {
         <td>{props.rank}</td>
         <td>{props.call}</td>
         <td>{props.returnDay}</td>
-        <td>{props.coupon_rimawari}</td>
+        <td>{props.coupon_rimawari}%</td>
         <td className='px-2'>
           {props.monoprice }
          
         </td>
-        <td className='px-2'>{props.sanko_rimawari }</td>
+        <td className='px-2'>{props.sanko_rimawari }%</td>
         <td className='text-xs'>{props.interest_day}</td>
         
         <td className='text-xs'>{props.amount}</td>
