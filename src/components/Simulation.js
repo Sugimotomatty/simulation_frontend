@@ -24,6 +24,7 @@ export default function Simulation() {
   const [rikindata, setrikinData] = React.useState('')
   const [rikinSumdata, setrikinSumData] = React.useState('')
   const [rikinCulmdata, setrikinCulmData] = React.useState('')
+  const [seletedNumdata, setseletedNumData] = React.useState('')
   const incheck_array = []
   const url_main =
     'https://script.google.com/macros/s/AKfycbzTc5D39cP2pck36w2RGArQjLS0t2WEWYgoscMerQ7NcnITlXAB61S_OV5qL_2Rl0pdsQ/exec'
@@ -33,6 +34,9 @@ export default function Simulation() {
   'https://script.google.com/macros/s/AKfycbxKB03z-VCWwgAJsUPpDNSzrKKj90qiNxqfPFA_p_UF3E0FxxopMZLbAZVxleYQ_EmEoQ/exec'  
   const url_rikin_Culm =
     'https://script.google.com/macros/s/AKfycbyaqU_oiTf5FRu5BypsBGs4LHJ7W0Obc6KmkA5g3CTInUTNJLjoRDRhzYv4lFULq5JQsg/exec'
+  const url_selected_Num = 'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api'
+
+  
 
   React.useEffect(() => {
     axios.get(url_main).then((res) => {
@@ -40,6 +44,17 @@ export default function Simulation() {
         throw new Error('APIがうまく動作していないようです')
       } else {
         setmainData(res.data.MainData)
+      }
+    })
+  }, [])
+
+  React.useEffect(() => {
+    axios.get(url_selected_Num).then((res) => {
+      if (res.status !== 200) {
+        throw new Error('APIがうまく動作していないようです')
+      } else {
+        setseletedNumData(res.data.message.length)
+        console.log(seletedNumdata)
       }
     })
   }, [])
@@ -314,7 +329,7 @@ export default function Simulation() {
             <thead></thead>
             <tbody>
               <tr>
-                <td rowSpan='5' className='bg-blue-900 text-white [writing-mode:vertical-rl]'>
+                <td rowSpan={seletedNumdata+2} className='bg-blue-900 text-white [writing-mode:vertical-rl]'>
                   収入
                 </td>
                 <td>銘柄</td>
