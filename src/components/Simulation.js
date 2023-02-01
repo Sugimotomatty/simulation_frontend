@@ -36,7 +36,6 @@ export default function Simulation() {
     'https://script.google.com/macros/s/AKfycbyaqU_oiTf5FRu5BypsBGs4LHJ7W0Obc6KmkA5g3CTInUTNJLjoRDRhzYv4lFULq5JQsg/exec'
   const url_selected_Num = 'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api'
 
-  
 
   React.useEffect(() => {
     axios.get(url_main).then((res) => {
@@ -85,8 +84,7 @@ export default function Simulation() {
       if (res.status !== 200) {
         throw new Error('APIがうまく動作していないようです')
       } else {
-        setrikinCulmData(res.data.afterRikinCulm)
-       
+        setrikinCulmData(res.data.afterRikinCulm)  
       }
     })
   }, [])
@@ -101,8 +99,8 @@ export default function Simulation() {
                 currency={item.currency}
                 type={item.type}
                 rank={item.rank}
-                call={item.call}
-                returnDay={item.returnDay}
+                call={item.call.slice(0, 10)}
+                returnDay={item.returnDay.slice(0, 10)}
                 coupon_rimawari={(item.coupon_rimawari*100).toFixed(2)}
                 monoprice={item.monoprice}
                 sanko_rimawari={(item.sanko_rimawari*100).toFixed(2)}
@@ -115,7 +113,7 @@ export default function Simulation() {
   }else{var afterSimulationmain = ""}
           
 
-          //ここから下スギモト
+  //ここから下スギモト
        
 
   if (rikindata.length != 0) {
