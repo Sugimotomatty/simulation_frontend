@@ -27,7 +27,7 @@ export default function Card(props) {
         <td>{props.rank}</td>
         <td>{props.call}</td>
         <td>{props.returnDay}</td>
-        <td>{props.cp}</td>
+        <td>{props.cp}%</td>
         <td>{props.interestDay}</td>
       </tr>
     </>
