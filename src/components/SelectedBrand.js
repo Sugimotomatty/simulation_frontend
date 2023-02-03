@@ -11,6 +11,9 @@ export default function SelectedBrand() {
   const [isAlert, setIsAlert] = React.useState(false)
   const [isKobetu, setIsKobetu] = React.useState(false)
   const [isHandleDrop, setIsHandleDrop] = React.useState('')
+  const [kaju_average, setKaju_average] = React.useState('計算結果を表示')
+  const [sankorimawari, setSankorimawari] = React.useState("")
+  const [enkansan, setEnkansan] = React.useState("")
   // ここから下スギモト
   const [data, setData] = React.useState('')
 
@@ -102,7 +105,7 @@ export default function SelectedBrand() {
     } else if (isHandleDrop === '1') {
       await axios
         .get(
-          'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com//tumitatetousisakitable',
+          'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/tumitatetousisakitable',
         )
         .then((res) => {
           const sandp = String(res.data.sandp)
@@ -111,7 +114,7 @@ export default function SelectedBrand() {
     } else if (isHandleDrop === '2') {
       await axios
         .get(
-          'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com//tumitatetousisakitable',
+          'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/tumitatetousisakitable',
         )
         .then((res) => {
           const acwi = String(res.data.acwi)
@@ -120,7 +123,7 @@ export default function SelectedBrand() {
     } else if (isHandleDrop === '3') {
       await axios
         .get(
-          'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com//tumitatetousisakitable',
+          'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/tumitatetousisakitable',
         )
         .then((res) => {
           const lowrisk = String(res.data.lowrisk)
@@ -129,7 +132,7 @@ export default function SelectedBrand() {
     } else if (isHandleDrop === '4') {
       await axios
         .get(
-          'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com//tumitatetousisakitable',
+          'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/tumitatetousisakitable',
         )
         .then((res) => {
           const middlerisk = String(res.data.middlerisk)
@@ -138,7 +141,7 @@ export default function SelectedBrand() {
     } else if (isHandleDrop === '5') {
       await axios
         .get(
-          'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com//tumitatetousisakitable',
+          'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/tumitatetousisakitable',
         )
         .then((res) => {
           const highrisk = String(res.data.highrisk)
@@ -168,8 +171,12 @@ export default function SelectedBrand() {
           if (incheck_array.includes(data.message[i]) === false) {
             incheck_array.push(data.message[i])
             //ここまで
-            console.log(typeof item.cp)
-            console.log(Number(item.cp.slice(0,-1)))
+
+            if (enkansan!==""){
+              console.log((Number(enkansan[i])*100).toFixed(2))
+            }
+
+
 
             return (
               <SelectedCard
@@ -183,6 +190,8 @@ export default function SelectedBrand() {
                 returnDay={item.returnDay.slice(0,10)}
                 cp={Number(item.cp.slice(0,-1)).toFixed(2)}
                 interestDay={item.interestDay}
+                enkansan ={enkansan!==""? (Number(enkansan[i])).toFixed(0):"計算する"}
+                rimawari ={sankorimawari!=="" ? (Number(sankorimawari[i])*100).toFixed(2) :"利回りを計算する"}
               />
             )
           }
@@ -251,6 +260,36 @@ export default function SelectedBrand() {
           >
             戻る
           </button>
+
+          <button
+            onClick={() => {
+              get_input_value()
+
+              if (
+                input_str.indexOf(',,') === -1 &&
+                input_str.slice(-1) !== ',' &&
+                isHandleDrop !== ''
+              ) {
+                const caluculate_url = "https://script.google.com/macros/s/AKfycbzQIqjV3N_l59JSb6X7GQOhhYWq6SI-1ERpf35Y4z-RSYcmZXZQ4iySLESA8SdbeefBVQ/exec"
+                axios.get(caluculate_url).then((res) => {
+                  if (res.status !== 200) {
+                    throw new Error('APIがうまく動作していないようです')
+                  } else {
+                    setKaju_average((Number(res.data.calculatebeforeSimulation[0].kaju_average)*100).toFixed(2))
+                    setSankorimawari(res.data.calculatebeforeSimulation[1].sankorimawari)
+                    setEnkansan(res.data.calculatebeforeSimulation[2].enkansan)
+                    
+                  }
+                })
+                
+              } else {
+                alert('空欄があるため正常に計算されませんでした。')
+              }
+            }}
+            className='h-10 bg-gray-400 text-white mx-8 px-8 rounded hover:bg-deepBlue'
+          >
+            計算を行う
+          </button>
           <button
             onClick={() => {
               get_input_value()
@@ -278,7 +317,7 @@ export default function SelectedBrand() {
                 rowSpan='2'
                 className='text-red-500 bg-white border border-black'
               >
-                計算結果表示
+                {kaju_average}
               </th>
             </tr>
             <tr>
@@ -295,12 +334,11 @@ export default function SelectedBrand() {
               <th rowSpan='2'>クーポン利回り</th>
               <th rowSpan='2'>単価</th>
               <th rowSpan='2'>利払い日</th>
-              <th rowSpan='1'>購入数量</th>
+              <th rowSpan='2'>購入数量</th>
+              <th>(円相当額)</th>
               <th rowSpan='2'>参考利回り</th>
             </tr>
-            <tr>
-              <th>(円相当額)</th>
-            </tr>
+            
           </thead>
           <tbody>{selectedCards}</tbody>
         </table>

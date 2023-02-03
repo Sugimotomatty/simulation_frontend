@@ -40,7 +40,8 @@ export default function SelectedCard(props) {
             onChange={(e) => setInputValue2(e.target.value)}
           ></input>
         </td>
-        <td className='text-xs'>{data_rimawari}%</td>
+        <td className='text-xs'>{props.enkansan}円</td>
+        <td className='text-xs'>{props.rimawari}%</td>
       </tr>
     </>
   )
