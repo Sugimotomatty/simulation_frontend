@@ -275,10 +275,11 @@ export default function SelectedBrand() {
                   if (res.status !== 200) {
                     throw new Error('APIがうまく動作していないようです')
                   } else {
+                    alert("正常に計算されています。4秒ほどお待ちください。")
                     setKaju_average((Number(res.data.calculatebeforeSimulation[0].kaju_average)*100).toFixed(2))
                     setSankorimawari(res.data.calculatebeforeSimulation[1].sankorimawari)
                     setEnkansan(res.data.calculatebeforeSimulation[2].enkansan)
-                    alert("正常に計算されています。4秒ほどお待ちください。")
+                    
                     
                   }
                 })
@@ -289,7 +290,7 @@ export default function SelectedBrand() {
             }}
             className='h-10 bg-gray-400 text-white mx-8 px-8 rounded hover:bg-deepBlue'
           >
-            計算を行う
+            利回り等の計算を行う
           </button>
           <button
             onClick={() => {
