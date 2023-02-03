@@ -4,7 +4,6 @@ import { format } from 'date-fns-tz'
 
 
 export default function AfterSimulationPortFolio(props) {
-  console.log(String(props.returnDay))
   return (
     <>
       <tr className='font-normal'>

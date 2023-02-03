@@ -16,17 +16,19 @@ export default function Simulation() {
   const timestamp = new Date().toLocaleString()
 
   const navigate = useNavigate()
-  const oresengraph4 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/oresen.jpg?${timestamp}`
-  const scatteroresengraph3 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/scatter_oresen.jpg?${timestamp}`
-  const tumitate_bougraph2 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_bou.jpg?${timestamp}`
-  const tumitate_wariaigraph5 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_wariai.jpg?${timestamp}`
+  const oresengraph4 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/oresengraph4.jpg?${timestamp}`
+  const scatteroresengraph3 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/scatteroresengraph3.jpg?${timestamp}`
+  const tumitate_bougraph2 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_bougraph2.jpg?${timestamp}`
+  const tumitate_wariaigraph5 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_wariaigraph5.jpg?${timestamp}`
   const scatterline = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/scatterline.jpg?${timestamp}`
   const simulation_pdf = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/simulation.pdf?${timestamp}`
+  const url_input_str = "https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/catchinputstr"
   const [maindata, setmainData] = React.useState('')
   const [rikindata, setrikinData] = React.useState('')
   const [rikinSumdata, setrikinSumData] = React.useState('')
   const [rikinCulmdata, setrikinCulmData] = React.useState('')
   const [seletedNumdata, setseletedNumData] = React.useState('')
+  const [doruen,setDoruen] = React.useState('')
   const incheck_array = []
   //https://script.google.com/macros/s/AKfycbzTc5D39cP2pck36w2RGArQjLS0t2WEWYgoscMerQ7NcnITlXAB61S_OV5qL_2Rl0pdsQ/exec
   //https://script.google.com/macros/s/AKfycbz9efLxG7IsQpmvwNCt_OjqnQTOL-LvHZDCGw5KPTYQrzJulnflkRo5vmV2zBxRGf_GvQ/exec
@@ -47,6 +49,16 @@ export default function Simulation() {
         throw new Error('APIがうまく動作していないようです')
       } else {
         setmainData(res.data.MainData)
+      }
+    })
+  }, [])
+
+  React.useEffect(() => {
+    axios.get(url_input_str).then((res) => {
+      if (res.status !== 200) {
+        throw new Error('APIがうまく動作していないようです')
+      } else {
+        setDoruen(res.data.message.split(',')[2])
       }
     })
   }, [])
@@ -103,12 +115,34 @@ export default function Simulation() {
   }, [])
 
 
+  const saveAsImage = uri => {
+    const downloadLink = document.createElement("a");
+  
+    if (typeof downloadLink.download === "string") {
+      downloadLink.href = uri;
+  
+      // ファイル名
+      downloadLink.download = "graph.png";
+  
+      // Firefox では body の中にダウンロードリンクがないといけないので一時的に追加
+      document.body.appendChild(downloadLink);
+  
+      // ダウンロードリンクが設定された a タグをクリック
+      downloadLink.click();
+  
+      // Firefox 対策で追加したリンクを削除しておく
+      document.body.removeChild(downloadLink);
+    } else {
+      window.open(uri);
+    }
+  }
+
 
 function htmltoCanvas(){
-    html2canvas(document.querySelector("#capture1")).then(canvas => {
-      // document.body.appendChild(canvas)
-      var dataURL = canvas.toDataURL("img/jpeg");
-      console.log(dataURL)
+    html2canvas(document.getElementById("capture1")).then(canvas => {
+      document.body.appendChild(canvas)
+      const dataURL = canvas.toDataURL("img/png");
+      saveAsImage(dataURL)
   });
 
   }
@@ -220,16 +254,13 @@ function htmltoCanvas(){
           戻る
         </button>
         <a
-          href={simulation_pdf}
-          onClick={()=>
-            htmltoCanvas()
-
-          }
+          href={simulation_pdf}   
           download='simulation.pdf'
           className='bg-orange-400 text-lg text-white px-8 py-1 mx-4 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition'
         >
           PDF出力
         </a>
+      
       </div>
       <Tabs>
         <TabList>
@@ -239,6 +270,18 @@ function htmltoCanvas(){
         </TabList>
 
         <TabPanel>
+          <div className='bg-gray-200 px-4 py-2 text-xs'>
+              <p>
+              ※運用シミュレーションは、税金（20.315%）控除後のデータです（譲渡益税は考慮しておりません）。年一回の福利計算をしています。
+
+              </p>
+              <p>
+              ※本シミュレーションのいかなる内容も、将来の運用成果を予測し、保証するものではありません。
+              </p>
+              <p>
+              ※情報の正確性には万全を期しておりますが、その内容の正確性、完全性、信頼性等を保証するものではありません。本シミュレーション及び掲載された情報を利用することで生じるいかなる損害（直接的、間接的を問わず）についても、当社は一切の責任を負うものではありません。実際の資産運用や投資判断に当たっては、必ずご自身の責任において最終的に判断してください。
+              </p>
+            </div>
           <img
             name='tumitate_bougraph2'
             src={tumitate_bougraph2}
@@ -311,8 +354,13 @@ function htmltoCanvas(){
                 ※情報の正確性には万全を期しておりますが、その内容の正確性、完全性、信頼性を保証するものではありません。本シュミレーション及び記載された情報を利用することで生じるいかなる損害(直接的、間接的を問わず)についても、当社は一切の責任を負うものではありません。実際の資産運用や投資判断に当たっては、必ずご自身の責任において最終的に判断してください。
               </p>
             </div>
+            
             {/* <img name="stock_img_3" src={StockImg_3} className="my-12" /> */}
           </div>
+
+          <div className='text-blue-700 font-bold text-1xl'>
+              円建:利金シミュレーション（{doruen}円/ドル円換算、税引き前）
+            </div>
 
           <table className='my-8 w-full divide-solid' id="capture2">
             <thead>

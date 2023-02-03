@@ -168,6 +168,8 @@ export default function SelectedBrand() {
           if (incheck_array.includes(data.message[i]) === false) {
             incheck_array.push(data.message[i])
             //ここまで
+            console.log(typeof item.cp)
+            console.log(Number(item.cp.slice(0,-1)))
 
             return (
               <SelectedCard
@@ -177,9 +179,9 @@ export default function SelectedBrand() {
                 currency={item.currency}
                 type={item.type}
                 rank={item.rank}
-                call={item.call}
-                returnDay={item.returnDay}
-                cp={item.cp}
+                call={item.call.slice(0,10)}
+                returnDay={item.returnDay.slice(0,10)}
+                cp={Number(item.cp.slice(0,-1)).toFixed(2)}
                 interestDay={item.interestDay}
               />
             )

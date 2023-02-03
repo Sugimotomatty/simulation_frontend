@@ -38,15 +38,7 @@ export default function Brand() {
     for (let i = 0; i < checks.length; i++) {
       if (checks[i].checked === true) {
         selectedNum.push(parseInt(i) + 1)
-        // newData["issuer"] = rowElements[i].cells[2]
-        // newData["currency"] = rowElements[i].cells[3]
-        // newData["type"] = rowElements[i].cells[4]
-        // newData["rank"] = rowElements[i].cells[5]
-        // newData["call"] = rowElements[i].cells[6]
-        // newData["returnDay"] = rowElements[i].cells[7]
-        // newData["cp"] = rowElements[i].cells[8]
-        // newData["interestDay"] = rowElements[i].cells[9]
-        // selectedData.push(newData);
+        
       }
     }
     // console.log(selectedNum);

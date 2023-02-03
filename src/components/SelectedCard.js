@@ -22,7 +22,7 @@ export default function SelectedCard(props) {
         <td>{props.rank}</td>
         <td>{props.call}</td>
         <td>{props.returnDay}</td>
-        <td>{props.cp}</td>
+        <td>{props.cp}%</td>
         <td className='px-2'>
           <input
             type='number'
