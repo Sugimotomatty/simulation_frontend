@@ -278,6 +278,7 @@ export default function SelectedBrand() {
                     setKaju_average((Number(res.data.calculatebeforeSimulation[0].kaju_average)*100).toFixed(2))
                     setSankorimawari(res.data.calculatebeforeSimulation[1].sankorimawari)
                     setEnkansan(res.data.calculatebeforeSimulation[2].enkansan)
+                    alert("正常に計算されています。4秒ほどお待ちください。")
                     
                   }
                 })
