@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
-import AfterSimulationPortFolio from './afterSimulationPortFolio'
+import AfterSimulationMain from './afterSimulationMain'
 import AfterSimulationRikinTsumitate from './afterSimulationRikinTsumitate'
 import AfterSimulationRikinCulm from './afterSimulationRikinCulm'
 import AfterSimulationRikinSum from './afterSimulationRikinSum'
@@ -26,8 +26,10 @@ export default function Simulation() {
   const [rikinCulmdata, setrikinCulmData] = React.useState('')
   const [seletedNumdata, setseletedNumData] = React.useState('')
   const incheck_array = []
+  //https://script.google.com/macros/s/AKfycbzTc5D39cP2pck36w2RGArQjLS0t2WEWYgoscMerQ7NcnITlXAB61S_OV5qL_2Rl0pdsQ/exec
+  //https://script.google.com/macros/s/AKfycbz9efLxG7IsQpmvwNCt_OjqnQTOL-LvHZDCGw5KPTYQrzJulnflkRo5vmV2zBxRGf_GvQ/exec
   const url_main =
-    'https://script.google.com/macros/s/AKfycbzTc5D39cP2pck36w2RGArQjLS0t2WEWYgoscMerQ7NcnITlXAB61S_OV5qL_2Rl0pdsQ/exec'
+    'https://script.google.com/macros/s/AKfycbz9efLxG7IsQpmvwNCt_OjqnQTOL-LvHZDCGw5KPTYQrzJulnflkRo5vmV2zBxRGf_GvQ/exec'
   const url_rikin =
     'https://script.google.com/macros/s/AKfycbymDeDmQd7H2Bs7gstahIXu2Faf8Ylf2FNluCexQ-gOGOW6p36ZB_lK8rIw3VTqXMp3/exec'
   const url_rikin_sum = 
@@ -35,7 +37,6 @@ export default function Simulation() {
   const url_rikin_Culm =
     'https://script.google.com/macros/s/AKfycbyaqU_oiTf5FRu5BypsBGs4LHJ7W0Obc6KmkA5g3CTInUTNJLjoRDRhzYv4lFULq5JQsg/exec'
   const url_selected_Num = 'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api'
-
 
   React.useEffect(() => {
     axios.get(url_main).then((res) => {
@@ -93,7 +94,7 @@ export default function Simulation() {
     var afterSimulationmain = maindata.map((item, index) => {
 
             return (
-              <AfterSimulationPortFolio
+              <AfterSimulationMain
                 number={item.number}
                 issuer={item.issuer}
                 currency={item.currency}
@@ -291,9 +292,9 @@ export default function Simulation() {
                 <th>参考利回り</th>
                 <th
                   rowSpan='2'
-                  className='text-red-500 bg-white border border-black'
+                  className='text-black bg-white border border-black'
                 >
-                  計算結果表示
+                  {maindata[0].kaju_average.toFixed(4)*100}%
                 </th>
               </tr>
               <tr>
