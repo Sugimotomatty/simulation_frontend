@@ -103,6 +103,7 @@ export default function Simulation() {
   }, [])
 
 
+
 function htmltoCanvas(){
     html2canvas(document.querySelector("#capture1")).then(canvas => {
       // document.body.appendChild(canvas)
