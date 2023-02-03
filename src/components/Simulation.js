@@ -294,7 +294,8 @@ export default function Simulation() {
                   rowSpan='2'
                   className='text-black bg-white border border-black'
                 >
-                  {maindata[0].kaju_average.toFixed(4)*100}%
+                  {maindata ?  maindata[0].kaju_average.toFixed(4)*100 : ""}%
+                  {/* {maindata[0].kaju_average.toFixed(4)*100}% */}
                 </th>
               </tr>
               <tr>
