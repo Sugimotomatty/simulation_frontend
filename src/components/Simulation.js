@@ -337,7 +337,7 @@ function htmltoCanvas(){
               src={tumitate_wariaigraph5}
               alt='画像の5'
             />
-            <img name='scatterline' src={scatterline} alt='画像の6' />
+            {/* <img name='scatterline' src={scatterline} alt='画像の6' /> */}
           </div>
         </TabPanel>
         <TabPanel >
