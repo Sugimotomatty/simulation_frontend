@@ -10,6 +10,7 @@ import simulation from '../images/simulation.pdf'
 import { useEffect, useState } from 'react'
 import { useNavigate, Navigate } from 'react-router-dom'
 import axios from 'axios'
+import html2canvas from 'html2canvas';
 
 export default function Simulation() {
   const timestamp = new Date().toLocaleString()
@@ -20,6 +21,7 @@ export default function Simulation() {
   const tumitate_bougraph2 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_bou.jpg?${timestamp}`
   const tumitate_wariaigraph5 = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/tumitate_wariai.jpg?${timestamp}`
   const scatterline = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/scatterline.jpg?${timestamp}`
+  const simulation_pdf = `https://lambda-upload-test-0227.s3.ap-northeast-1.amazonaws.com/simulation.pdf?${timestamp}`
   const [maindata, setmainData] = React.useState('')
   const [rikindata, setrikinData] = React.useState('')
   const [rikinSumdata, setrikinSumData] = React.useState('')
@@ -37,6 +39,7 @@ export default function Simulation() {
   const url_rikin_Culm =
     'https://script.google.com/macros/s/AKfycbyaqU_oiTf5FRu5BypsBGs4LHJ7W0Obc6KmkA5g3CTInUTNJLjoRDRhzYv4lFULq5JQsg/exec'
   const url_selected_Num = 'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api'
+  const url_create_pdf = 'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/create-pdf'
 
   React.useEffect(() => {
     axios.get(url_main).then((res) => {
@@ -47,6 +50,15 @@ export default function Simulation() {
       }
     })
   }, [])
+
+  React.useEffect(() => {
+    axios.get(url_create_pdf).then((res) => {
+      if (res.status !== 200) {
+        throw new Error('APIがうまく動作していないようです')
+      } 
+    })
+  }, [])
+
 
   React.useEffect(() => {
     axios.get(url_selected_Num).then((res) => {
@@ -89,6 +101,16 @@ export default function Simulation() {
       }
     })
   }, [])
+
+
+function htmltoCanvas(){
+    html2canvas(document.querySelector("#capture1")).then(canvas => {
+      // document.body.appendChild(canvas)
+      var dataURL = canvas.toDataURL("img/jpeg");
+      console.log(dataURL)
+  });
+
+  }
 
   if (maindata.length != 0) {
     var afterSimulationmain = maindata.map((item, index) => {
@@ -197,7 +219,11 @@ export default function Simulation() {
           戻る
         </button>
         <a
-          href={simulation}
+          href={simulation_pdf}
+          onClick={()=>
+            htmltoCanvas()
+
+          }
           download='simulation.pdf'
           className='bg-orange-400 text-lg text-white px-8 py-1 mx-4 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition'
         >
@@ -270,7 +296,8 @@ export default function Simulation() {
             <img name='scatterline' src={scatterline} alt='画像の6' />
           </div>
         </TabPanel>
-        <TabPanel>
+        <TabPanel >
+          <div  id="capture1">
           <div className='flex flex-row-reverse '>
             <div className='bg-gray-200 px-4 py-2 text-xs'>
               <p>
@@ -286,7 +313,7 @@ export default function Simulation() {
             {/* <img name="stock_img_3" src={StockImg_3} className="my-12" /> */}
           </div>
 
-          <table className='my-8 w-full divide-solid'>
+          <table className='my-8 w-full divide-solid' id="capture2">
             <thead>
               <tr className='bg-blue-100'>
                 <th>参考利回り</th>
@@ -294,7 +321,7 @@ export default function Simulation() {
                   rowSpan='2'
                   className='text-black bg-white border border-black'
                 >
-                  {maindata ?  maindata[0].kaju_average.toFixed(4)*100 : ""}%
+                  {maindata ?  (maindata[0].kaju_average*100).toFixed(3) : ""}%
                   {/* {maindata[0].kaju_average.toFixed(4)*100}% */}
                 </th>
               </tr>
@@ -325,7 +352,7 @@ export default function Simulation() {
             <tbody>{afterSimulationmain}</tbody>
           </table>
 
-          <table className='my-8 w-full divide-solid'>
+          <table className='my-8 w-full divide-solid'id="capture3">
             <thead></thead>
             <tbody>
               <tr>
@@ -351,6 +378,7 @@ export default function Simulation() {
               {afterSimulationRikinCulm}
             </tbody>
           </table>
+          </div>
         </TabPanel>
       </Tabs>
     </>
