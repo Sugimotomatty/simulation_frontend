@@ -14,15 +14,15 @@ export default function SelectedCard(props) {
 
   return (
     <>
-      <tr>
-        <td>{props.id}</td>
-        <td>{props.issuer}</td>
-        <td>{props.currency}</td>
-        <td>{props.type}</td>
-        <td>{props.rank}</td>
-        <td>{props.call}</td>
-        <td>{props.returnDay}</td>
-        <td>{props.cp}%</td>
+      <tr className='text-sm'>
+        <td >{props.id}</td>
+        <td >{props.issuer}</td>
+        <td >{props.currency}</td>
+        <td >{props.type}</td>
+        <td >{props.rank}</td>
+        <td >{props.call}</td>
+        <td >{props.returnDay}</td>
+        <td >{props.cp}%</td>
         <td className='px-2'>
           <input
             type='number'

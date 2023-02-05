@@ -311,10 +311,10 @@ export default function SelectedBrand() {
             シュミレーション
           </button>
         </div>
-        <table className='my-8 w-full'>
+        <table className='my-8 w-full text-xs'>
           <thead>
             <tr>
-              <th>参考利回り</th>
+              <th className='text-sm bg-blue-900 text-white border-black border-solid border'>参考利回り</th>
               <th
                 rowSpan='2'
                 className='text-red-500 bg-white border border-black'
@@ -323,20 +323,20 @@ export default function SelectedBrand() {
               </th>
             </tr>
             <tr>
-              <th>(加重平均)</th>
+              <th className='text-sm bg-blue-900 text-white border-black border-solid border'>(加重平均)</th>
             </tr>
-            <tr>
+            <tr className='text-sm bg-blue-900 text-white border-black border-solid border'>
               <th rowSpan='2'>番号</th>
-              <th rowSpan='2'>発行体</th>
-              <th rowSpan='2'>通貨</th>
-              <th rowSpan='2'>商品種類</th>
-              <th rowSpan='2'>債券格付け</th>
-              <th rowSpan='2'>ファーストコール</th>
-              <th rowSpan='2'>償還日</th>
-              <th rowSpan='2'>クーポン利回り</th>
-              <th rowSpan='2'>単価</th>
-              <th rowSpan='2'>利払い日</th>
-              <th rowSpan='2'>購入数量</th>
+              <th rowSpan='2' className='w-40 border-black border-solid border'>発行体</th>
+              <th rowSpan='2' className='w-16 border-black border-solid border'>通貨</th>
+              <th rowSpan='2' className='w-16 border-black border-solid border'>商品種類</th>
+              <th rowSpan='2' className='w-16 border-black border-solid border'>債券格付け</th>
+              <th rowSpan='2' className='w-16 border-black border-solid border'>ファーストコール</th>
+              <th rowSpan='2' className='w-16 border-black border-solid border'>償還日</th>
+              <th rowSpan='2' className='w-40 text-sum border-black border-solid border'>クーポン利回り</th>
+              <th rowSpan='2' className='w-16 border-black border-solid border'>単価</th>
+              <th rowSpan='2' className='border-black border-solid border'>利払い日</th>
+              <th rowSpan='2' className='w-16 border-black border-solid border'>購入数量</th>
               <th>(円相当額)</th>
               <th rowSpan='2'>参考利回り</th>
             </tr>

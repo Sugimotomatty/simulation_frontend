@@ -3,23 +3,21 @@ main table {
   border-collapse: collapse;
 }
 
-main table thead tr th {
+/* main table thead tr th {
   border: solid 1px #333;
   color: white;
   background-color: #1e3a8a;
   padding: 0 20px;
   text-align: center;
   font-size: 0.75rem;
-}
+} */
 
-table thead tr th {
+/* table thead tr th {
   border: solid 1px #333;
   color: white;
   background-color: #1e3a8a;
-  padding: 0 20px;
   text-align: center;
-  font-size: 0.75rem;
-}
+} */
 
 main table tr td {
   border: solid 1px #333;

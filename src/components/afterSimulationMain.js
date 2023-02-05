@@ -6,7 +6,7 @@ import { format } from 'date-fns-tz'
 export default function AfterSimulationPortFolio(props) {
   return (
     <>
-      <tr className='font-normal'>
+      <tr className='font-normal text-sm'>
         <td>{props.number }</td>
         <td>{props.issuer}</td>
         <td>{props.currency}</td>

@@ -138,11 +138,12 @@ export default function Simulation() {
   }
 
 
-function htmltoCanvas(){
+async function htmltoCanvas(){
     html2canvas(document.getElementById("capture1")).then(canvas => {
       document.body.appendChild(canvas)
       const dataURL = canvas.toDataURL("img/png");
-      saveAsImage(dataURL)
+      // saveAsImage(dataURL)
+      console.log(dataURL)
   });
 
   }
@@ -164,7 +165,7 @@ function htmltoCanvas(){
                 sanko_rimawari={(item.sanko_rimawari*100).toFixed(2)}
                 interest_day={item.interest_day}
                 amount={item.amount.toLocaleString()}
-                yen={(item.yen).toLocaleString()}
+                yen={(item.yen).toFixed(0)}
               />
             )
     })
@@ -254,8 +255,9 @@ function htmltoCanvas(){
           戻る
         </button>
         <a
-          href={simulation_pdf}   
-          download='simulation.pdf'
+          // href={simulation_pdf}
+          onClick={()=>htmltoCanvas()}   
+          // download='simulation.pdf'
           className='bg-orange-400 text-lg text-white px-8 py-1 mx-4 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition'
         >
           PDF出力
@@ -362,10 +364,10 @@ function htmltoCanvas(){
               円建:利金シミュレーション（{doruen}円/ドル円換算、税引き前）
             </div>
 
-          <table className='my-8 w-full divide-solid' id="capture2">
+          <table className='my-8 w-full divide-solid text-xs ' id="capture2">
             <thead>
-              <tr className='bg-blue-100'>
-                <th>参考利回り</th>
+              <tr>
+                <th className='bg-blue-900 text-white border-black border-solid border'>参考利回り</th>
                 <th
                   rowSpan='2'
                   className='text-black bg-white border border-black'
@@ -375,25 +377,25 @@ function htmltoCanvas(){
                 </th>
               </tr>
               <tr>
-                <th>(加重平均)</th>
+                <th className='bg-blue-900 text-white border-black border-solid border'>(加重平均)</th>
               </tr>
-              <tr>
-                <th rowSpan='2'>番号</th>
-                <th rowSpan='2'>発行体</th>
-                <th rowSpan='2'>通貨</th>
-                <th rowSpan='2'>商品種類</th>
-                <th rowSpan='2'>債券格付け</th>
-                <th rowSpan='2'>ファーストコール</th>
-                <th rowSpan='2'>償還日</th>
-                <th rowSpan='2'>クーポン利回り</th>
-                <th rowSpan='2'>単価</th>
-                <th rowSpan='2'>参考利回り</th>
-                <th rowSpan='2'>利払い日</th>
-                <th rowSpan='1'>購入数量</th>
-                <th rowSpan='1'>購入金額</th>
+              <tr className='bg-blue-900 text-white border-black border-solid border'>
+                <th rowSpan='2' className='border-black border-solid border'>番号</th>
+                <th rowSpan='2' className='border-black border-solid border'>発行体</th>
+                <th rowSpan='2' className='border-black border-solid border'>通貨</th>
+                <th rowSpan='2' className='border-black border-solid border'>商品種類</th>
+                <th rowSpan='2' className='border-black border-solid border'>債券格付け</th>
+                <th rowSpan='2' className='border-black border-solid border'>ファーストコール</th>
+                <th rowSpan='2' className='border-black border-solid border'>償還日</th>
+                <th rowSpan='2' className='border-black border-solid border'>クーポン利回り</th>
+                <th rowSpan='2' className='border-black border-solid border'>単価</th>
+                <th rowSpan='2' className='border-black border-solid border'>参考利回り</th>
+                <th rowSpan='2' className='border-black border-solid border'>利払い日</th>
+                <th rowSpan='1' className='border-black border-solid border'>購入数量</th>
+                <th rowSpan='1' className='border-black border-solid border'>購入金額</th>
                
               </tr>
-              <tr>
+              <tr className='bg-blue-900 text-white border-black border-solid border'>
                 <th>(ドル相当額)</th>
                 <th>(円相当額)</th>
               </tr>

@@ -106,17 +106,17 @@ export default function Brand() {
 
       <table className='my-8 w-full'>
         <thead>
-          <tr>
-            <th>選択</th>
-            <th>番号</th>
-            <th>発行体</th>
-            <th>通貨</th>
-            <th>商品種類</th>
-            <th>債券格付け</th>
-            <th>ファーストコール</th>
-            <th>償還日</th>
-            <th>CP</th>
-            <th>利払い日</th>
+          <tr className='bg-blue-900 text-white border-black border-solid border'>
+            <th className='border-black border-solid border'>選択</th>
+            <th className='border-black border-solid border'>番号</th>
+            <th className='border-black border-solid border'>発行体</th>
+            <th className='border-black border-solid border'>通貨</th>
+            <th className='border-black border-solid border'>商品種類</th>
+            <th className='border-black border-solid border'>債券格付け</th>
+            <th className='border-black border-solid border'>ファーストコール</th>
+            <th className='border-black border-solid border'>償還日</th>
+            <th className='border-black border-solid border'>CP</th>
+            <th className='border-black border-solid border'>利払い日</th>
           </tr>
         </thead>
         <tbody id='targetTable'>{cards}</tbody>
