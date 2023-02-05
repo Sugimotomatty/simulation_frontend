@@ -264,22 +264,22 @@ export default function SelectedBrand() {
           <button
             onClick={() => {
               get_input_value()
-
+              
               if (
                 input_str.indexOf(',,') === -1 &&
                 input_str.slice(-1) !== ',' &&
                 isHandleDrop !== ''
               ) {
+                alert("正常に計算されています。6から10秒ほどお待ちください。")
+
                 const caluculate_url = "https://script.google.com/macros/s/AKfycbzQIqjV3N_l59JSb6X7GQOhhYWq6SI-1ERpf35Y4z-RSYcmZXZQ4iySLESA8SdbeefBVQ/exec"
                 axios.get(caluculate_url).then((res) => {
                   if (res.status !== 200) {
                     throw new Error('APIがうまく動作していないようです')
                   } else {
-                    alert("正常に計算されています。4秒ほどお待ちください。")
                     setKaju_average((Number(res.data.calculatebeforeSimulation[0].kaju_average)*100).toFixed(2))
                     setSankorimawari(res.data.calculatebeforeSimulation[1].sankorimawari)
                     setEnkansan(res.data.calculatebeforeSimulation[2].enkansan)
-                    
                     
                   }
                 })
