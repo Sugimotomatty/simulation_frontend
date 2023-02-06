@@ -7,14 +7,14 @@ export default function AfterSimulationPortFolio(props) {
   return (
     <>
       <tr className='font-normal text-sm'>
-        <td>{props.number }</td>
-        <td>{props.issuer}</td>
-        <td>{props.currency}</td>
-        <td>{props.type}</td>
-        <td>{props.rank}</td>
-        <td>{props.call}</td>
-        <td>{props.returnDay}</td>
-        <td>{props.coupon_rimawari}%</td>
+        <td className='w-13'>{props.number }</td>
+        <td className='w-30'>{props.issuer}</td>
+        <td className='w-10'>{props.currency}</td>
+        <td className='w-15'>{props.type}</td>
+        <td className='w-25'>{props.rank}</td>
+        <td className='w-30'>{props.call}</td>
+        <td className='w-25'>{props.returnDay}</td>
+        <td className='w-30'>{props.coupon_rimawari}%</td>
         <td className='px-2'>
           {props.monoprice }
          

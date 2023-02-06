@@ -211,7 +211,6 @@ export default function SelectedBrand() {
         <div className='flex gap-4'>
           <div className='flex flex-col mb-6'>
             <label className='mb-2'>積み立て投資先</label>
-
             <select
               id='pet-select'
               onChange={(e) => {
@@ -271,7 +270,6 @@ export default function SelectedBrand() {
                 isHandleDrop !== ''
               ) {
                 alert("正常に計算されています。6から10秒ほどお待ちください。")
-
                 const caluculate_url = "https://script.google.com/macros/s/AKfycbzQIqjV3N_l59JSb6X7GQOhhYWq6SI-1ERpf35Y4z-RSYcmZXZQ4iySLESA8SdbeefBVQ/exec"
                 axios.get(caluculate_url).then((res) => {
                   if (res.status !== 200) {

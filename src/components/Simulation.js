@@ -367,37 +367,37 @@ async function htmltoCanvas(){
           <table className='my-8 w-full divide-solid text-xs ' id="capture2">
             <thead>
               <tr>
-                <th className='bg-blue-900 text-white border-black border-solid border'>参考利回り</th>
+                <th className='bg-blue-900 text-white border-black border-solid border text-sm'>参考利回り</th>
                 <th
                   rowSpan='2'
-                  className='text-black bg-white border border-black'
+                  className='text-black bg-white border border-black text-sm'
                 >
                   {maindata ?  (maindata[0].kaju_average*100).toFixed(3) : ""}%
                   {/* {maindata[0].kaju_average.toFixed(4)*100}% */}
                 </th>
               </tr>
               <tr>
-                <th className='bg-blue-900 text-white border-black border-solid border'>(加重平均)</th>
+                <th className='bg-blue-900 text-white border-black border-solid border text-sm'>(加重平均)</th>
               </tr>
               <tr className='bg-blue-900 text-white border-black border-solid border'>
-                <th rowSpan='2' className='border-black border-solid border'>番号</th>
-                <th rowSpan='2' className='border-black border-solid border'>発行体</th>
-                <th rowSpan='2' className='border-black border-solid border'>通貨</th>
-                <th rowSpan='2' className='border-black border-solid border'>商品種類</th>
-                <th rowSpan='2' className='border-black border-solid border'>債券格付け</th>
-                <th rowSpan='2' className='border-black border-solid border'>ファーストコール</th>
-                <th rowSpan='2' className='border-black border-solid border'>償還日</th>
-                <th rowSpan='2' className='border-black border-solid border'>クーポン利回り</th>
-                <th rowSpan='2' className='border-black border-solid border'>単価</th>
-                <th rowSpan='2' className='border-black border-solid border'>参考利回り</th>
-                <th rowSpan='2' className='border-black border-solid border'>利払い日</th>
-                <th rowSpan='1' className='border-black border-solid border'>購入数量</th>
-                <th rowSpan='1' className='border-black border-solid border'>購入金額</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm'>番号</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm'>発行体</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm'>通貨</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm'>商品種類</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm'>債券格付け</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm'>ファーストコール</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm'>償還日</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm'>クーポン利回り</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm'>単価</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm'>参考利回り</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm'>利払い日</th>
+                <th rowSpan='1' className='border-black border-solid border text-sm'>購入数量</th>
+                <th rowSpan='1' className='border-black border-solid border text-sm'>購入金額</th>
                
               </tr>
               <tr className='bg-blue-900 text-white border-black border-solid border'>
-                <th>(ドル相当額)</th>
-                <th>(円相当額)</th>
+                <th className='border-black border-solid border text-sm'>(ドル相当額)</th>
+                <th className='border-black border-solid border text-sm'>(円相当額)</th>
               </tr>
             </thead>
             <tbody>{afterSimulationmain}</tbody>
