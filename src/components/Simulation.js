@@ -268,14 +268,23 @@ async function htmltoCanvas(){
         >
           戻る
         </button>
+        <div>
+        <a
+          href={simulation_pdf}
+          download='simulation.pdf'
+          className='bg-orange-400 text-lg text-white px-8 py-1 mx-4 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition'
+        >
+          PDF出力
+        </a>
         <a
           // href={simulation_pdf}
           onClick={()=>htmltoCanvas()}   
           // download='simulation.pdf'
           className='bg-orange-400 text-lg text-white px-8 py-1 mx-4 rounded transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-110 transition'
         >
-          PDF出力
+          canvasを作成
         </a>
+        </div>
       
       </div>
       <Tabs>
@@ -357,7 +366,7 @@ async function htmltoCanvas(){
           </div>
         </TabPanel>
         <TabPanel >
-          <div  id="capture1">
+         
           <div className='flex flex-row-reverse '>
             <div className='bg-gray-200 px-4 py-2 text-xs'>
               <p>
@@ -373,6 +382,7 @@ async function htmltoCanvas(){
             
             {/* <img name="stock_img_3" src={StockImg_3} className="my-12" /> */}
           </div>
+          <div  id="capture1">
 
           <div className='text-blue-700 font-bold text-1xl'>
               円建:利金シミュレーション（{doruen}円/ドル円換算、税引き前）
