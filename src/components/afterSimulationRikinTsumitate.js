@@ -5,18 +5,18 @@ export default function AfterSimulationRikinTsumitate(props) {
   return (
     <>
       <tr>
-        <td>{props.name}</td>
-        <td>{props.oneyear}</td>
-        <td>{props.twoyear}</td>
-        <td>{props.threeyear}</td>
-        <td>{props.fouryear}</td>
-        <td>{props.fiveyear}</td>
-        <td>{props.sixyear}</td>
-        <td>{props.sevenyear}</td>
-        <td>{props.eightyear}</td>
-        <td>{props.nineyear}</td>
-        <td>{props.tenyear}</td>
-        <td>{props.sum}</td>
+        <td className='p-2'>{props.name}</td>
+        <td className='p-2'>{props.oneyear}</td>
+        <td className='p-2'>{props.twoyear}</td>
+        <td className='p-2'>{props.threeyear}</td>
+        <td className='p-2'>{props.fouryear}</td>
+        <td className='p-2'>{props.fiveyear}</td>
+        <td className='p-2'>{props.sixyear}</td>
+        <td className='p-2'>{props.sevenyear}</td>
+        <td className='p-2'>{props.eightyear}</td>
+        <td className='p-2'>{props.nineyear}</td>
+        <td className='p-2'>{props.tenyear}</td>
+        <td className='p-2'>{props.sum}</td>
       </tr>
     </>
   )

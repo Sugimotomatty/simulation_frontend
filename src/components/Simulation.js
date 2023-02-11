@@ -42,6 +42,7 @@ export default function Simulation() {
     'https://script.google.com/macros/s/AKfycbyaqU_oiTf5FRu5BypsBGs4LHJ7W0Obc6KmkA5g3CTInUTNJLjoRDRhzYv4lFULq5JQsg/exec'
   const url_selected_Num = 'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/api'
   const url_create_pdf = 'https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/create-pdf'
+  
 
   React.useEffect(() => {
     axios.get(url_main).then((res) => {
@@ -138,13 +139,26 @@ export default function Simulation() {
   }
 
 
+
 async function htmltoCanvas(){
-    html2canvas(document.getElementById("capture1")).then(canvas => {
+    let dataURI = ""
+    await html2canvas(document.getElementById("capture1")).then(canvas => {
       document.body.appendChild(canvas)
       const dataURL = canvas.toDataURL("img/png");
       // saveAsImage(dataURL)
-      console.log(dataURL)
+      // console.log(dataURL)
+      dataURI += dataURL
   });
+
+  const url = `https://765rrgmzf2.execute-api.ap-northeast-1.amazonaws.com/send_input_data_uri/${dataURI.slice(22)}`
+  await axios.get(url).then((res) => {
+    if (res.status !== 200) {
+      throw new Error('APIがうまく動作していないようです')
+    } else {
+      console.log(dataURI)
+      console.log("正常に送信されています。")
+    }
+  })
 
   }
 
@@ -364,10 +378,10 @@ async function htmltoCanvas(){
               円建:利金シミュレーション（{doruen}円/ドル円換算、税引き前）
             </div>
 
-          <table className='my-8 w-full divide-solid text-xs ' id="capture2">
+          <table className='my-8 w-full divide-solid text-xs' id="capture2">
             <thead>
               <tr>
-                <th className='bg-blue-900 text-white border-black border-solid border text-sm'>参考利回り</th>
+                <th className='bg-blue-900 text-white border-black border-solid border text-sm p-2'>参考利回り</th>
                 <th
                   rowSpan='2'
                   className='text-black bg-white border border-black text-sm'
@@ -377,28 +391,25 @@ async function htmltoCanvas(){
                 </th>
               </tr>
               <tr>
-                <th className='bg-blue-900 text-white border-black border-solid border text-sm'>(加重平均)</th>
+                <th className='bg-blue-900 text-white border-black border-solid border text-sm p-2'>(加重平均)</th>
               </tr>
               <tr className='bg-blue-900 text-white border-black border-solid border'>
-                <th rowSpan='2' className='border-black border-solid border text-sm'>番号</th>
-                <th rowSpan='2' className='border-black border-solid border text-sm'>発行体</th>
-                <th rowSpan='2' className='border-black border-solid border text-sm'>通貨</th>
-                <th rowSpan='2' className='border-black border-solid border text-sm'>商品種類</th>
-                <th rowSpan='2' className='border-black border-solid border text-sm'>債券格付け</th>
-                <th rowSpan='2' className='border-black border-solid border text-sm'>ファーストコール</th>
-                <th rowSpan='2' className='border-black border-solid border text-sm'>償還日</th>
-                <th rowSpan='2' className='border-black border-solid border text-sm'>クーポン利回り</th>
-                <th rowSpan='2' className='border-black border-solid border text-sm'>単価</th>
-                <th rowSpan='2' className='border-black border-solid border text-sm'>参考利回り</th>
-                <th rowSpan='2' className='border-black border-solid border text-sm'>利払い日</th>
-                <th rowSpan='1' className='border-black border-solid border text-sm'>購入数量</th>
-                <th rowSpan='1' className='border-black border-solid border text-sm'>購入金額</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm p-2'>番号</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm p-2'>発行体</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm p-2'>通貨</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm p-2'>商品種類</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm p-2'>債券格付け</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm p-2'>ファーストコール</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm p-2'>償還日</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm p-2'>クーポン利回り</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm p-2'>単価</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm p-2'>参考利回り</th>
+                <th rowSpan='2' className='border-black border-solid border text-sm p-2'>利払い日</th>
+                <th rowSpan='1' className='border-black border-solid border text-sm p-2'>購入数量(ドル相当額)</th>
+                <th rowSpan='1' className='border-black border-solid border text-sm p-2'>購入金額(円相当額)</th>
                
               </tr>
-              <tr className='bg-blue-900 text-white border-black border-solid border'>
-                <th className='border-black border-solid border text-sm'>(ドル相当額)</th>
-                <th className='border-black border-solid border text-sm'>(円相当額)</th>
-              </tr>
+              
             </thead>
             <tbody>{afterSimulationmain}</tbody>
           </table>
@@ -407,21 +418,21 @@ async function htmltoCanvas(){
             <thead></thead>
             <tbody>
               <tr>
-                <td rowSpan={seletedNumdata+2} className='bg-blue-900 text-white [writing-mode:vertical-rl]'>
+                <td rowSpan={seletedNumdata+2} className='bg-blue-900 text-white [writing-mode:vertical-rl] p-3'>
                   収入
                 </td>
-                <td>銘柄</td>
-                <td>初年度</td>
-                <td>2年目</td>
-                <td>3年目</td>
-                <td>4年目</td>
-                <td>5年目</td>
-                <td>6年目</td>
-                <td>7年目</td>
-                <td>8年目</td>
-                <td>9年目</td>
-                <td>10年目</td>
-                <td>合計</td>
+                <td className='p-3'>銘柄</td>
+                <td className='p-3'>初年度</td>
+                <td className='p-3'>2年目</td>
+                <td className='p-3'>3年目</td>
+                <td className='p-3'>4年目</td>
+                <td className='p-3'>5年目</td>
+                <td className='p-3'>6年目</td>
+                <td className='p-3'>7年目</td>
+                <td className='p-3'>8年目</td>
+                <td className='p-3'>9年目</td>
+                <td className='p-3'>10年目</td>
+                <td className='p-3'>合計</td>
               </tr>
 
               {afterSimulationRikin}

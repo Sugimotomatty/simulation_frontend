@@ -5,17 +5,17 @@ export default function AfterSimulationRikinCulm(props) {
   return (
     <>
       <tr className='bg-zinc-300'>
-        <td colSpan='2'>{props.name}</td>
-        <td>{props.oneyear}</td>
-        <td>{props.twoyear}</td>
-        <td>{props.threeyear}</td>
-        <td>{props.fouryear}</td>
-        <td>{props.fiveyear}</td>
-        <td>{props.sixyear}</td>
-        <td>{props.sevenyear}</td>
-        <td>{props.eightyear}</td>
-        <td>{props.nineyear}</td>
-        <td>{props.tenyear}</td>
+        <td colSpan='2' className='p-1'>{props.name}</td>
+        <td className='p-1'>{props.oneyear}</td>
+        <td className='p-1'>{props.twoyear}</td>
+        <td className='p-1'>{props.threeyear}</td>
+        <td className='p-1'>{props.fouryear}</td>
+        <td className='p-1'>{props.fiveyear}</td>
+        <td className='p-1'>{props.sixyear}</td>
+        <td className='p-1'>{props.sevenyear}</td>
+        <td className='p-1'>{props.eightyear}</td>
+        <td className='p-1'>{props.nineyear}</td>
+        <td className='p-1'>{props.tenyear}</td>
       </tr>
     </>
   )
