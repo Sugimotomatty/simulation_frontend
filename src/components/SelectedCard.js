@@ -11,6 +11,7 @@ export default function SelectedCard(props) {
 
     return clearTimeout(timer)
   }, [inputValue, inputValue2])
+  
 
   return (
     <>
@@ -37,7 +38,7 @@ export default function SelectedCard(props) {
             type='number'
             placeholder='数値を入力してください'
             className='p-1'
-            onChange={(e) => setInputValue2(e.target.value)}
+            onChange={(e) => setInputValue2(Number(e.target.value))}
           ></input>
         </td>
         <td className='text-xs'>{props.enkansan}円</td>

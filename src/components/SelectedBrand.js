@@ -176,8 +176,6 @@ export default function SelectedBrand() {
               console.log((Number(enkansan[i])*100).toFixed(2))
             }
 
-
-
             return (
               <SelectedCard
                 key={index}
@@ -190,12 +188,11 @@ export default function SelectedBrand() {
                 returnDay={item.returnDay.slice(0,10)}
                 cp={Number(item.cp.slice(0,-1)).toFixed(2)}
                 interestDay={item.interestDay}
-                enkansan ={enkansan!==""? (Number(enkansan[i])).toFixed(0):"計算する"}
+                enkansan ={enkansan!==""? (Number(enkansan[i])).toLocaleString(undefined, {minimumFractionDigits: 0}) :"計算する"}
                 rimawari ={sankorimawari!=="" ? (Number(sankorimawari[i])*100).toFixed(2) :"利回りを計算する"}
               />
             )
           }
-
           //ここから下スギモト
         }
       }
@@ -335,8 +332,8 @@ export default function SelectedBrand() {
               <th rowSpan='2' className='w-16 border-black border-solid border'>単価</th>
               <th rowSpan='2' className='border-black border-solid border'>利払い日</th>
               <th rowSpan='2' className='w-16 border-black border-solid border'>購入数量</th>
-              <th>(円相当額)</th>
-              <th rowSpan='2'>参考利回り</th>
+              <th rowSpan='2' className='w-32 border-black border-solid border'>(円相当額)</th>
+              <th rowSpan='2' className='border-black border-solid border'>参考利回り</th>
             </tr>
             
           </thead>
