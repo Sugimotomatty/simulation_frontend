@@ -328,9 +328,9 @@ export default function SelectedBrand() {
               <th rowSpan='2' className='w-24 border-black border-solid border'>債券格付け</th>
               <th rowSpan='2' className='w-16 border-black border-solid border'>ファーストコール</th>
               <th rowSpan='2' className='w-16 border-black border-solid border'>償還日</th>
-              <th rowSpan='2' className='w-24 text-sum border-black border-solid border'>クーポン利回り</th>
+              <th rowSpan='2' className='w-16 text-sum border-black border-solid border'>クーポン利回り</th>
               <th rowSpan='2' className='w-16 border-black border-solid border'>単価</th>
-              <th rowSpan='2' className='border-black border-solid border'>利払い日</th>
+              <th rowSpan='2' className='w-16 border-black border-solid border'>利払い日</th>
               <th rowSpan='2' className='w-16 border-black border-solid border'>購入数量</th>
               <th rowSpan='2' className='w-32 border-black border-solid border'>(円相当額)</th>
               <th rowSpan='2' className='border-black border-solid border'>参考利回り</th>

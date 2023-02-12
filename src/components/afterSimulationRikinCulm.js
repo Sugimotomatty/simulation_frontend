@@ -6,16 +6,16 @@ export default function AfterSimulationRikinCulm(props) {
     <>
       <tr className='bg-zinc-300'>
         <td colSpan='2' className='p-1'>{props.name}</td>
-        <td className='p-1'>{props.oneyear}</td>
-        <td className='p-1'>{props.twoyear}</td>
-        <td className='p-1'>{props.threeyear}</td>
-        <td className='p-1'>{props.fouryear}</td>
-        <td className='p-1'>{props.fiveyear}</td>
-        <td className='p-1'>{props.sixyear}</td>
-        <td className='p-1'>{props.sevenyear}</td>
-        <td className='p-1'>{props.eightyear}</td>
-        <td className='p-1'>{props.nineyear}</td>
-        <td className='p-1'>{props.tenyear}</td>
+        <td className='p-1 text-sm '>{props.oneyear}</td>
+        <td className='p-1 text-sm '>{props.twoyear}</td>
+        <td className='p-1 text-sm '>{props.threeyear}</td>
+        <td className='p-1 text-sm '>{props.fouryear}</td>
+        <td className='p-1 text-sm '>{props.fiveyear}</td>
+        <td className='p-1 text-sm '>{props.sixyear}</td>
+        <td className='p-1 text-sm '>{props.sevenyear}</td>
+        <td className='p-1 text-sm '>{props.eightyear}</td>
+        <td className='p-1 text-sm '>{props.nineyear}</td>
+        <td className='p-1 text-sm '>{props.tenyear}</td>
       </tr>
     </>
   )
