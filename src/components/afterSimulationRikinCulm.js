@@ -16,6 +16,7 @@ export default function AfterSimulationRikinCulm(props) {
         <td className='p-1 text-sm '>{props.eightyear}</td>
         <td className='p-1 text-sm '>{props.nineyear}</td>
         <td className='p-1 text-sm '>{props.tenyear}</td>
+        <td className='p-1 bg-white font-bold'>{props.tenyear}</td>
       </tr>
     </>
   )

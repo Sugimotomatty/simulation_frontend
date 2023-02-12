@@ -5,6 +5,7 @@ export default function AfterSimulationRikinSum(props) {
   return (
     <>
       <tr className='bg-slate-400 font-bold'>
+        <td className='p-1 text-sm bg-blue-900 border-t-0'></td>
         <td className='p-1 text-sm '>{props.name}</td>
         <td className='p-1 text-sm '>{props.oneyear}</td>
         <td className='p-1 text-sm '>{props.twoyear}</td>
@@ -16,7 +17,7 @@ export default function AfterSimulationRikinSum(props) {
         <td className='p-1 text-sm '>{props.eightyear}</td>
         <td className='p-1 text-sm '>{props.nineyear}</td>
         <td className='p-1 text-sm '>{props.tenyear}</td>
-        <td rowSpan="2" className='bg-white'>{props.sum}</td>
+        <td className='bg-white border-b-0 text-sm'>{props.sum}</td>
       </tr>
     </>
   )

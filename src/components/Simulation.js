@@ -428,21 +428,21 @@ async function htmltoCanvas(){
             <thead></thead>
             <tbody>
               <tr>
-                <td rowSpan={seletedNumdata+2} className='bg-blue-900 text-white [writing-mode:vertical-rl] text-sm p-3'>
+                <td rowSpan={seletedNumdata+1} className='bg-blue-900 text-white [writing-mode:vertical-rl] text-sm p-3 border-b-0'>
                   収入
                 </td>
-                <td className='p-3 text-sm '>銘柄</td>
-                <td className='p-3 text-sm '>初年度</td>
-                <td className='p-3 text-sm '>2年目</td>
-                <td className='p-3 text-sm '>3年目</td>
-                <td className='p-3 text-sm '>4年目</td>
-                <td className='p-3 text-sm '>5年目</td>
-                <td className='p-3 text-sm '>6年目</td>
-                <td className='p-3 text-sm '>7年目</td>
-                <td className='p-3 text-sm '>8年目</td>
-                <td className='p-3 text-sm '>9年目</td>
-                <td className='p-3 text-sm '>10年目</td>
-                <td className='p-3 text-sm '>合計</td>
+                <td className='p-3 text-sm'>銘柄</td>
+                <td className='p-3 text-sm'>初年度</td>
+                <td className='p-3 text-sm'>2年目</td>
+                <td className='p-3 text-sm'>3年目</td>
+                <td className='p-3 text-sm'>4年目</td>
+                <td className='p-3 text-sm'>5年目</td>
+                <td className='p-3 text-sm'>6年目</td>
+                <td className='p-3 text-sm'>7年目</td>
+                <td className='p-3 text-sm'>8年目</td>
+                <td className='p-3 text-sm'>9年目</td>
+                <td className='p-3 text-sm'>10年目</td>
+                <td className='p-3 text-sm'>合計</td>
               </tr>
 
               {afterSimulationRikin}
